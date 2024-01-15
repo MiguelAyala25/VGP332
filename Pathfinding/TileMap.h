@@ -15,4 +15,6 @@ private:
 	std::vector<X::TextureId> mTiles; // I forgot to add this in class
 	int mColumns = 0;
 	int mRows = 0;
+	int mTileWidth = 0;
+	int mTileheight = 0;
 };
