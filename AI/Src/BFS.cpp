@@ -28,7 +28,7 @@ using namespace AI;
 
 		if (node->colum == endX && node->row == endY)
 		{
-			found == true;
+			found = true;
 		}
 		else
 		{

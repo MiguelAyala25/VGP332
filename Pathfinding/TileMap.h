@@ -4,7 +4,9 @@
 #include <AI.h>
 #include "GridBasedGraph.h"
 
+
 using Path = std::vector<X::Math::Vector2>;
+
 
 class TileMap
 {

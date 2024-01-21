@@ -4,7 +4,6 @@
 
 namespace AI
 {
-	using NodeList = std::list<GridBasedGraph::Node*>;
 	class BFS
 	{
 	public:

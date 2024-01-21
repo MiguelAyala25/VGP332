@@ -60,4 +60,5 @@ namespace AI
 		std::vector <Node> mNodes;
 
 	};
+	using NodeList = std::list<GridBasedGraph::Node*>;
 }

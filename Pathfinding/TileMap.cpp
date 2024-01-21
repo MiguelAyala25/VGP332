@@ -2,6 +2,7 @@
 
 using namespace AI;
 
+
 namespace
 {
 	// Converts 2D grid coordinates (x, y) to a single index for a 1D array representation.
@@ -185,9 +186,17 @@ Path TileMap::FindPathBFS(int startX, int startY, int endX, int endY)
 	Path path;
 	BFS bfs;
 
-	if (bfs.Run(mGraph, startX, startX, endX, endY))
+	if (bfs.Run(mGraph, startX, startY, endX, endY))
 	{
+		const NodeList& closedList = bfs.GetClosedList();
 
+		GridBasedGraph::Node* node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->colum, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
 	}
 	return path;
 }
