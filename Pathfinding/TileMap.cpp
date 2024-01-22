@@ -247,7 +247,34 @@ Path TileMap::FindPathDFS(int startX, int startY, int endX, int endY)
 	}
 	return path;
 }
+Path TileMap::FindPathDijkstra(int startX, int startY, int endX, int endY)
+{
+	auto getCost = [](const GridBasedGraph::Node* node, const GridBasedGraph::Node* neightbor)
+		{
+			if (node->colum != neightbor->colum && node->row != neightbor->row)
+			{
+				return 5.0f;
+			}
+			return 1.0f;
+		};
 
+	Path path;
+	Dijkstra dijkstra;
+
+	if (dijkstra.Run(mGraph, startX, startY, endX, endY,getCost))
+	{
+		const NodeList& closedList = dijkstra.GetClosedList();
+
+		GridBasedGraph::Node* node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->colum, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
+	}
+	return path;
+}
 //How to convert a 2d array into a 1d array.
 
 // 2D map - 5 columns x 4 rows

@@ -31,12 +31,14 @@ namespace AI
 			Node* parent = nullptr;
 			bool opened = false;
 			bool closed = false;
+			float cost = 0.0f;
 
 			void Reset()
 			{
 				parent = nullptr;
 				opened = false;
 				closed = false;
+				cost = 0.0f;
 			}
 
 		};
