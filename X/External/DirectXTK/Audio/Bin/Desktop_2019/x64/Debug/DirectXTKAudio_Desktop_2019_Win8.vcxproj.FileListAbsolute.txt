@@ -1,1 +1,0 @@
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\X\External\DirectXTK\Audio\Bin\Desktop_2019\x64\Debug\DirectXTKAudioWin8.lib

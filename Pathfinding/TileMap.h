@@ -7,6 +7,12 @@
 
 using Path = std::vector<X::Math::Vector2>;
 
+struct Tile
+{
+	X::TextureId textureId;
+	bool isWalkable = false;
+};
+
 
 class TileMap
 {
@@ -23,11 +29,14 @@ public:
 	X::Math::Vector2 GetPixelPosition(int x, int y)const;
 
 	Path FindPathBFS(int startX, int startY, int endX, int endY);
+	Path FindPathDFS(int startX, int startY, int endX, int endY);
+
 
 private:
+
 	AI::GridBasedGraph mGraph;
 	std::vector<int> mMap;
-	std::vector<X::TextureId> mTiles; // I forgot to add this in class
+	std::vector<Tile> mTiles; // I forgot to add this in class
 	int mColumns = 0;
 	int mRows = 0;
 	int mTileWidth = 0;

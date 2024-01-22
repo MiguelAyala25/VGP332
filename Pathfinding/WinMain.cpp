@@ -54,6 +54,11 @@ bool GameLoop(float deltaTime)
 		{
 			path = tileMap.FindPathBFS(startX, startY, endX, endY);
 		}
+		if (ImGui::Button("RunDFS"))
+		{
+			path = tileMap.FindPathDFS(startX, startY, endX, endY);
+		}
+
 	}
 
 	ImGui::End();
@@ -74,6 +79,7 @@ bool GameLoop(float deltaTime)
 	X::DrawScreenCircle(tileMap.GetPixelPosition(endX, endY), 10.0f, X::Colors::Yellow);
 
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
+
 	return quit;
 }
 

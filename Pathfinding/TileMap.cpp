@@ -42,14 +42,14 @@ void TileMap::LoadTiles(const char* fileName)
 
 		// Add a new texture ID to the list of tile textures.
 	 // Load the texture from the file and store its ID.
-		X::TextureId& tileId = mTiles.emplace_back();
-		tileId = X::LoadTexture(buffer.c_str());
-		
+		Tile& tile = mTiles.emplace_back();
+		tile.textureId = X::LoadTexture(buffer.c_str());
+		tile.isWalkable = isWalkable == 0;
 	}
 	file.close();
 
-	mTileWidth = X::GetSpriteWidth(mTiles[0]);
-	mTileheight= X::GetSpriteHeight(mTiles[0]);
+	mTileWidth = X::GetSpriteWidth(mTiles[0].textureId);
+	mTileheight= X::GetSpriteHeight(mTiles[0].textureId);
 
 
 }
@@ -108,6 +108,11 @@ void TileMap::LoadMap(const char* fileName)
 	{
 		for (int x = 0; x < colums; ++x)
 		{
+			if (IsBlocked(x, y))
+			{
+				continue;
+			}
+
 			GridBasedGraph::Node* node = mGraph.getNode(x, y);
 			node->neighbours[GridBasedGraph::North] = GetNeighbor(x,y - 1);
 			node->neighbours[GridBasedGraph::South] = GetNeighbor(x, y + 1 );
@@ -132,14 +137,14 @@ void TileMap::Render() const
 		{
 			int mapIndex = ToIndex(x, y, mColumns); //Convert to 1D index from 2D coordinates.
 			int tileType = mMap[mapIndex];
-			X::DrawSprite(mTiles[tileType], position, X::Pivot::TopLeft);
+			X::DrawSprite(mTiles[tileType].textureId, position, X::Pivot::TopLeft);
 			position.x += mTileWidth; // Move to the next tile position horizontally.
 		}
 		position.x = 0.0f; // Reset horizontal position after a row is complete.
 		position.y += mTileheight; // Move to the next row position vertically.
 	}
 
-	// Draw debug
+	// Draw debug drawnode
 	for (int y = 0; y < mRows; ++y)
 	{
 		for (int x = 0; x < mColumns; ++x)
@@ -157,7 +162,23 @@ void TileMap::Render() const
 			}
 		}
 	}
+	//draw the search branches
+	for (int y = 0; y < mRows; ++y)
+	{
+		for (int x = 0; x < mColumns; ++x)
+		{
+			const GridBasedGraph::Node* node = mGraph.getNode(x, y);
+			
+			if (node->parent != nullptr)
+			{
+				const X::Math::Vector2 a = GetPixelPosition(node->colum, node->row);
+				const X::Math::Vector2 b = GetPixelPosition(node->parent->colum, node->parent->row);
 
+				X::DrawScreenLine(a, b, X::Colors::White);
+			}
+			
+		}
+	}
 }
 
 
@@ -166,7 +187,13 @@ bool TileMap::IsBlocked(int x, int y) const
 	if (x >= 0 && x < mColumns &&
 		y >= 0 && y < mRows)
 	{
-		return false;
+		const int index = ToIndex(x, y, mColumns);
+		const int tileId = mMap[index];
+		if (mTiles[tileId].isWalkable)
+		{
+			return false;
+		}
+		
 	}
 
 	return true;
@@ -201,6 +228,25 @@ Path TileMap::FindPathBFS(int startX, int startY, int endX, int endY)
 	return path;
 }
 
+Path TileMap::FindPathDFS(int startX, int startY, int endX, int endY)
+{
+	Path path;
+	DFS dfs;
+
+	if (dfs.Run(mGraph, startX, startY, endX, endY))
+	{
+		const NodeList& closedList = dfs.GetClosedList();
+
+		GridBasedGraph::Node* node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->colum, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
+	}
+	return path;
+}
 
 //How to convert a 2d array into a 1d array.
 
