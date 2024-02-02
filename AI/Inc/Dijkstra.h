@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma once
 
 #include "GridBasedGraph.h"
 

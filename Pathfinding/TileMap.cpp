@@ -251,10 +251,6 @@ Path TileMap::FindPathDijkstra(int startX, int startY, int endX, int endY)
 {
 	auto getCost = [](const GridBasedGraph::Node* node, const GridBasedGraph::Node* neightbor)
 		{
-			if (node->colum != neightbor->colum && node->row != neightbor->row)
-			{
-				return 5.0f;
-			}
 			return 1.0f;
 		};
 
@@ -275,6 +271,65 @@ Path TileMap::FindPathDijkstra(int startX, int startY, int endX, int endY)
 	}
 	return path;
 }
+
+Path TileMap::FindPathAStar(int startX, int startY, int endX, int endY)
+{
+	auto getCost = [](const GridBasedGraph::Node* node, const GridBasedGraph::Node* neighbor)
+		{
+			if (node->colum != neighbor->colum && node->row != neighbor->row)
+			{
+				//return 5.0f;
+			}
+			return 1.0f;
+		};
+	auto manhattanHeuristic = [](const GridBasedGraph::Node* neighbor, const GridBasedGraph::Node* endNode)
+		{
+			float D = 10.f;
+			float dx = abs(neighbor->colum - endNode->colum);
+			float dy = abs(neighbor->row - endNode->row);
+
+			return D * (dx + dy);
+		};
+	auto euclideanHeuristic = [](const GridBasedGraph::Node* neighbor, const GridBasedGraph::Node* endNode)
+		{
+			float D = 10.f;
+			float dx = abs(neighbor->colum - endNode->colum);
+			float dy = abs(neighbor->row - endNode->row);
+
+			return D * sqrt(dx * dx  + dy * dy);
+		};
+	auto diagonalHeuristic = [](const GridBasedGraph::Node* neighbor, const GridBasedGraph::Node* endNode)
+		{
+			float D = 10.f;
+			float D2 = 10.f;
+
+			float dx = abs(neighbor->colum - endNode->colum);
+			float dy = abs(neighbor->row - endNode->row);
+
+			return D * (dx + dy) + (D2 - dx * D) * std::min(dx, dy);
+		};
+
+
+
+
+	Path path;
+	AStar aStar;
+
+	if (aStar.Run(mGraph, startX, startY, endX, endY, getCost, manhattanHeuristic))
+	{
+		const NodeList& closedList = aStar.GetClosedList();
+
+		GridBasedGraph::Node* node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->colum, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
+	}
+	return path;
+}
+
 //How to convert a 2d array into a 1d array.
 
 // 2D map - 5 columns x 4 rows
