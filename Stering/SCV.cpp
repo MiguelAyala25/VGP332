@@ -7,6 +7,7 @@ SCV::SCV(AI::AIWorld& world): Agent(world,static_cast<uint32_t>(AgentType::SCV))
 
 void SCV::Load()
 {
+	//mSteeringModule
 	for (int = 0; i < mTextureIds.size(); ++i)
 	{
 		char name[128];
@@ -22,6 +23,10 @@ void SCV::unLoad()
 
 void SCV::Update(float deltaTime)
 {
+
+	//const X::Math::Vector2 force = mSteeringMove;
+	//const X::Math::Vector2 acceleration = force / mass;
+	velocity = acceleration * deltaTime;
 }
 
 void SCV::Render()

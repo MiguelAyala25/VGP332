@@ -15,7 +15,6 @@ namespace AI
 
 		void SetWeight(float weight) { mWeight = weight; }
 		float getWeight() { return mWeight; }
-
 	private:
 
 		float mWeight = 1;

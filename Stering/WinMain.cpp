@@ -1,7 +1,7 @@
 #include <XEngine.h> // <> for external includes, "" for internal includes
 #include <AI.h>
 #include <ImGui/Inc/imgui.h>
-
+#include "SCV.h"
 using namespace AI;
 AIWorld aiWorld;
 std::vector<std::unique_ptr<SCV>> scvAgents;
@@ -23,7 +23,7 @@ void killAgent()
 	if (!scvAgents.empty())
 	{
 		auto& agent = scvAgents.back();
-		agent->Unload();
+		agent->unLoad();
 		agent.reset();
 		scvAgents.pop_back();
 	}
@@ -54,11 +54,11 @@ bool GameLoop(float deltaTime)
 
 	for (auto& agent: scvAgents)
 	{
-		agent->Update();
+		agent->Update(deltaTime);
 	}
 	for (auto& agent : scvAgents)
 	{
-		agent->Rendert();
+		agent->Render();
 	}
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
 
