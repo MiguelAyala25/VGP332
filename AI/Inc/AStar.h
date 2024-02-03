@@ -19,4 +19,4 @@ namespace AI
 		NodeList mClosedList;
 
 	};
-}
+}	
