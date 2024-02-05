@@ -1,6 +1,5 @@
-﻿  Miner.cpp
-  MinerStates.cpp
+﻿  Pilot.cpp
+  PilotStates.cpp
   WinMain.cpp
   Generating Code...
-     Creating library C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FSM.lib and object C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FSM.exp
   FSM.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FSM.exe

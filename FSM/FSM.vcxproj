@@ -133,6 +133,8 @@
   <ItemGroup>
     <ClCompile Include="Miner.cpp" />
     <ClCompile Include="MinerStates.cpp" />
+    <ClCompile Include="Pilot.cpp" />
+    <ClCompile Include="PilotStates.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +148,8 @@
   <ItemGroup>
     <ClInclude Include="Miner.h" />
     <ClInclude Include="MinerStates.h" />
+    <ClInclude Include="Pilot.h" />
+    <ClInclude Include="PilotStates.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

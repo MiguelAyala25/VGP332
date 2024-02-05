@@ -2,11 +2,39 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Miner.cpp" />
-    <ClCompile Include="MinerStates.cpp" />
+    <ClCompile Include="Miner.cpp">
+      <Filter>Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="MinerStates.cpp">
+      <Filter>Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Pilot.cpp">
+      <Filter>Pilot</Filter>
+    </ClCompile>
+    <ClCompile Include="PilotStates.cpp">
+      <Filter>Pilot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Miner.h" />
-    <ClInclude Include="MinerStates.h" />
+    <ClInclude Include="Miner.h">
+      <Filter>Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="MinerStates.h">
+      <Filter>Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="Pilot.h">
+      <Filter>Pilot</Filter>
+    </ClInclude>
+    <ClInclude Include="PilotStates.h">
+      <Filter>Pilot</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Miner">
+      <UniqueIdentifier>{825bfae2-3f2e-4306-9e38-81eb36f8914a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pilot">
+      <UniqueIdentifier>{3418893f-f4cb-45c0-a7fb-2fbf020d9a98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

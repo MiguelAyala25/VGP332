@@ -2,12 +2,13 @@
 #include <XEngine.h> // <> for external includes, "" for internal includes
 #include <ImGui/Inc/imgui.h>
 #include "Miner.h"
-
+#include "Pilot.h"
 Miner miner;
-
+Pilot pilot;
 void GameInit()
 {
-	miner.Initialize();
+	//miner.Initialize();
+	pilot.Initialize();
 }
 
 bool GameLoop(float deltaTime)
@@ -15,12 +16,13 @@ bool GameLoop(float deltaTime)
 	
 	if (X::IsKeyPressed(X::Keys::SPACE))
 	{
-		miner.Update(deltaTime);
+		//miner.Update(deltaTime);
+		pilot.Update(deltaTime);
 	}
 
 	ImGui::Begin("FSM", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-		miner.DebugUI();
-
+		//miner.DebugUI();
+		pilot.DebugUI();
 	ImGui::End();
 
 
@@ -31,7 +33,8 @@ bool GameLoop(float deltaTime)
 
 void GameCleanup()
 {
-	miner.Terminate();
+	//miner.Terminate();
+	pilot.Terminate();
 }
 
 //--------------------------------------------------
