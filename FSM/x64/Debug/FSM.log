@@ -1,4 +1,6 @@
-﻿  Pilot.cpp
+﻿  Miner.cpp
+  MinerStates.cpp
+  Pilot.cpp
   PilotStates.cpp
   WinMain.cpp
   Generating Code...

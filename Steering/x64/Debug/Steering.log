@@ -1,0 +1,31 @@
+﻿  SCV.cpp
+  WinMain.cpp
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(17,45): warning C4244: 'initializing': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(17,26): warning C4244: 'initializing': conversion from 'uint32_t' to 'const float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(18,47): warning C4244: 'initializing': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(18,27): warning C4244: 'initializing': conversion from 'uint32_t' to 'const float', possible loss of data
+  Generating Code...
+SCV.obj : error LNK2019: unresolved external symbol "unsigned __int64 __cdecl X::LoadTexture(char const *)" (?LoadTexture@X@@YA_KPEBD@Z) referenced in function "public: void __cdecl SCV::Load(void)" (?Load@SCV@@QEAAXXZ)
+SCV.obj : error LNK2019: unresolved external symbol "void __cdecl X::DrawSprite(unsigned __int64,struct X::Math::Vector2 const &,enum X::Pivot,enum X::Flip)" (?DrawSprite@X@@YAX_KAEBUVector2@Math@1@W4Pivot@1@W4Flip@1@@Z) referenced in function "public: void __cdecl SCV::Render(void)" (?Render@SCV@@QEAAXXZ)
+SCV.obj : error LNK2019: unresolved external symbol "unsigned int __cdecl X::GetScreenWidth(void)" (?GetScreenWidth@X@@YAIXZ) referenced in function "public: void __cdecl SCV::Load(void)" (?Load@SCV@@QEAAXXZ)
+WinMain.obj : error LNK2001: unresolved external symbol "unsigned int __cdecl X::GetScreenWidth(void)" (?GetScreenWidth@X@@YAIXZ)
+SCV.obj : error LNK2019: unresolved external symbol "unsigned int __cdecl X::GetScreenHeight(void)" (?GetScreenHeight@X@@YAIXZ) referenced in function "public: void __cdecl SCV::Load(void)" (?Load@SCV@@QEAAXXZ)
+WinMain.obj : error LNK2001: unresolved external symbol "unsigned int __cdecl X::GetScreenHeight(void)" (?GetScreenHeight@X@@YAIXZ)
+SCV.obj : error LNK2019: unresolved external symbol "public: __cdecl AI::Entity::Entity(class AI::AIWorld &,unsigned int)" (??0Entity@AI@@QEAA@AEAVAIWorld@1@I@Z) referenced in function "public: __cdecl AI::Agent::Agent(class AI::AIWorld &,unsigned int)" (??0Agent@AI@@QEAA@AEAVAIWorld@1@I@Z)
+SCV.obj : error LNK2019: unresolved external symbol "public: virtual __cdecl AI::Entity::~Entity(void)" (??1Entity@AI@@UEAA@XZ) referenced in function "int `public: __cdecl AI::Agent::Agent(class Agent::AIWorld &,unsigned int)'::`1'::dtor$0" (?dtor$0@?0???0Agent@AI@@QEAA@AEAVAIWorld@1@I@Z@4HA)
+SCV.obj : error LNK2019: unresolved external symbol "public: __cdecl AI::SteeringModule::SteeringModule(class AI::Agent &)" (??0SteeringModule@AI@@QEAA@AEAVAgent@1@@Z) referenced in function "class std::unique_ptr<class AI::SteeringModule,struct std::default_delete<class AI::SteeringModule> > __cdecl std::make_unique<class AI::SteeringModule,class SCV &,0>(class SCV &)" (??$make_unique@VSteeringModule@AI@@AEAVSCV@@$0A@@std@@YA?AV?$unique_ptr@VSteeringModule@AI@@U?$default_delete@VSteeringModule@AI@@@std@@@0@AEAVSCV@@@Z)
+SCV.obj : error LNK2019: unresolved external symbol "public: struct X::Math::Vector2 __cdecl AI::SteeringModule::Calculate(void)" (?Calculate@SteeringModule@AI@@QEAA?AUVector2@Math@X@@XZ) referenced in function "public: void __cdecl SCV::Update(float)" (?Update@SCV@@QEAAXM@Z)
+SCV.obj : error LNK2001: unresolved external symbol "public: virtual struct X::Math::Vector2 __cdecl AI::SeekBehavior::Calculate(class AI::Agent &)" (?Calculate@SeekBehavior@AI@@UEAA?AUVector2@Math@X@@AEAVAgent@2@@Z)
+SCV.obj : error LNK2001: unresolved external symbol "float const X::Math::kPi" (?kPi@Math@X@@3MB)
+SCV.obj : error LNK2001: unresolved external symbol "float const X::Math::kTwoPi" (?kTwoPi@Math@X@@3MB)
+WinMain.obj : error LNK2019: unresolved external symbol "void __cdecl X::Start(char const *)" (?Start@X@@YAXPEBD@Z) referenced in function WinMain
+WinMain.obj : error LNK2019: unresolved external symbol "void __cdecl X::Run(class std::function<bool __cdecl(float)>)" (?Run@X@@YAXV?$function@$$A6A_NM@Z@std@@@Z) referenced in function WinMain
+WinMain.obj : error LNK2019: unresolved external symbol "void __cdecl X::Stop(void)" (?Stop@X@@YAXXZ) referenced in function WinMain
+WinMain.obj : error LNK2019: unresolved external symbol "struct X::Math::Vector2 __cdecl X::RandomVector2(struct X::Math::Vector2 const &,struct X::Math::Vector2 const &)" (?RandomVector2@X@@YA?AUVector2@Math@1@AEBU231@0@Z) referenced in function "void __cdecl SpawnAgent(void)" (?SpawnAgent@@YAXXZ)
+WinMain.obj : error LNK2019: unresolved external symbol "bool __cdecl X::IsKeyPressed(int)" (?IsKeyPressed@X@@YA_NH@Z) referenced in function "bool __cdecl GameLoop(float)" (?GameLoop@@YA_NM@Z)
+WinMain.obj : error LNK2019: unresolved external symbol "bool __cdecl ImGui::Begin(char const *,bool *,int)" (?Begin@ImGui@@YA_NPEBDPEA_NH@Z) referenced in function "bool __cdecl GameLoop(float)" (?GameLoop@@YA_NM@Z)
+WinMain.obj : error LNK2019: unresolved external symbol "void __cdecl ImGui::End(void)" (?End@ImGui@@YAXXZ) referenced in function "bool __cdecl GameLoop(float)" (?GameLoop@@YA_NM@Z)
+WinMain.obj : error LNK2019: unresolved external symbol "bool __cdecl ImGui::Button(char const *,struct ImVec2 const &)" (?Button@ImGui@@YA_NPEBDAEBUImVec2@@@Z) referenced in function "bool __cdecl GameLoop(float)" (?GameLoop@@YA_NM@Z)
+WinMain.obj : error LNK2019: unresolved external symbol "public: void __cdecl AI::AIWorld::Initialize(void)" (?Initialize@AIWorld@AI@@QEAAXXZ) referenced in function "void __cdecl GameInit(void)" (?GameInit@@YAXXZ)
+WinMain.obj : error LNK2019: unresolved external symbol "public: void __cdecl AI::AIWorld::Update(void)" (?Update@AIWorld@AI@@QEAAXXZ) referenced in function "bool __cdecl GameLoop(float)" (?GameLoop@@YA_NM@Z)
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Steering.exe : fatal error LNK1120: 21 unresolved externals

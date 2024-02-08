@@ -12,3 +12,11 @@
 //FSM
 #include "State.h"
 #include "StateMachine.h"
+
+//steering
+#include "Entity.h"
+#include "Agent.h"
+#include "AIWorld.h"
+#include"SteeringBehavior.h"
+#include"SteeringModule.h"
+#include"SeekBehavior.h"

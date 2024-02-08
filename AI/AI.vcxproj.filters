@@ -16,6 +16,12 @@
     <Filter Include="Inc\FSM">
       <UniqueIdentifier>{fb888f56-1081-442c-a3d3-b7296df5571d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\Steering">
+      <UniqueIdentifier>{5b539809-b56b-41ad-8266-a6c96c141928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Steering">
+      <UniqueIdentifier>{2340ca06-951b-48db-9e4f-8b6710d733bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\AI.h">
@@ -46,7 +52,25 @@
       <Filter>Inc\FSM</Filter>
     </ClInclude>
     <ClInclude Include="Inc\StateMachine.h">
-      <Filter>Inc</Filter>
+      <Filter>Inc\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Entity.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Agent.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\AIWorld.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SteeringBehavior.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SteeringModule.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SeekBehavior.h">
+      <Filter>Inc\Steering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +91,18 @@
     </ClCompile>
     <ClCompile Include="Src\GridBasedGraph.cpp">
       <Filter>Src\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Entity.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AIWorld.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SteeringModule.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SeekBehavior.cpp">
+      <Filter>Src\Steering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
