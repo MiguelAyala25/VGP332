@@ -12,7 +12,7 @@ namespace AI
 		{
 		}
 		~Agent() override = default;
-
+		std::vector<const Agent*> neighbors;
 		const Agent* target = nullptr;
 		X::Math::Vector2 destination = X::Math::Vector2::Zero();
 		X::Math::Vector2 velocity = X::Math::Vector2::Zero();

@@ -1,12 +1,3 @@
-﻿  Precompiled.cpp
-  AIWorld.cpp
-  AStar.cpp
-  BFS.cpp
-  DFS.cpp
-  Dijkstra.cpp
-  Entity.cpp
-  GridBasedGraph.cpp
-  SeekBehavior.cpp
-  SteeringModule.cpp
-  Generating Code...
-  AI.vcxproj -> C:\Users\LCV2242930.LCIEDUCATION\Documents\GitHub\VGP332\x64\Debug\AI.lib
+﻿  GroupBehavior.cpp
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\AI\Src\GroupBehavior.cpp(43): warning C4715: 'AI::SeparationBehavior::Calculate': not all control paths return a value
+  AI.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\AI.lib
