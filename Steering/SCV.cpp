@@ -114,3 +114,61 @@ void SCV::SetSeparation(bool active)
 {
 	//mSeparationBehavior->SetActive(active);
 }
+void SCV::SetAlignment(bool active)
+{
+	//mAlignmentBehavior->SetActive(active);
+}
+void SCV::SetCohesion(bool active)
+{
+	//mCohesionBehavior->SetActive(active);
+}
+void SCV::SetEvade(bool active)
+{
+	mEvadeBehavior->SetActive(active);
+}
+
+void SCV::SetSeekWeight(float weight)
+{
+	mSeekBehavior->SetWeight(weight);
+}
+
+void SCV::SetFleeWeight(float weight)
+{
+	mFleeBehavior->SetWeight(weight);
+}
+
+void SCV::SetArriveWeight(float weight)
+{
+	mArriveBehavior->SetWeight(weight);
+}
+
+void SCV::SetWanderWeight(float weight)
+{
+	mWanderBehavior->SetWeight(weight);
+}
+
+void SCV::SetPursuitWeight(float weight)
+{
+	mPursuitBehavior->SetWeight(weight);
+}
+
+void SCV::SetSeparationWeight(float weight)
+{
+	mSeparationBehavior->SetWeight(weight);
+}
+
+void SCV::SetAlignmentWeight(float weight)
+{
+	mAlignmentBehavior->SetWeight(weight);
+}
+
+void SCV::SetCohesionWeight(float weight)
+{
+	mCohesionBehavior->SetWeight(weight);
+}
+
+void SCV::SetEvadeWeight(float weight)
+{
+
+	mEvadeBehavior->SetWeight(weight);
+}
