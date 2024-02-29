@@ -1,1 +1,9 @@
-﻿  Steering.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Steering.exe
+﻿  SCV.cpp
+  WinMain.cpp
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(46,45): warning C4244: 'initializing': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(46,26): warning C4244: 'initializing': conversion from 'uint32_t' to 'const float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(47,47): warning C4244: 'initializing': conversion from 'uint32_t' to 'float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Steering\WinMain.cpp(47,27): warning C4244: 'initializing': conversion from 'uint32_t' to 'const float', possible loss of data
+  Generating Code...
+     Creating library C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Steering.lib and object C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Steering.exp
+  Steering.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Steering.exe

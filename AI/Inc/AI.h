@@ -2,8 +2,12 @@
 
 #include "Common.h"
 
+#include "AIWorld.h"
+#include "Agent.h"
+#include "Entity.h"
 #include "GridBasedGraph.h"
-// Panthing Algorithms
+
+//Pathfinding Algorithms
 #include "BFS.h"
 #include "DFS.h"
 #include "Dijkstra.h"
@@ -13,16 +17,16 @@
 #include "State.h"
 #include "StateMachine.h"
 
-//steering
-#include "Entity.h"
-#include "Agent.h"
-#include "AIWorld.h"
-#include"SteeringBehavior.h"
-#include"SteeringModule.h"
-#include"SeekBehavior.h"
+//Steering
+#include "SteeringBehavior.h"
+#include "SteeringModule.h"
+#include "SeekBehavior.h"
 #include "WanderBehavior.h"
 #include "PursuitBehavior.h"
 #include "EvadeBehavior.h"
-
-//group
 #include "GroupBehavior.h"
+
+//
+#include "MemoryRecord.h"
+#include "Sensor.h"
+#include "PerceptionModule.h"
