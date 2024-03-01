@@ -31,6 +31,9 @@ void SCV::Load()
 	mArriveBehavior = mSteeringModule->AddBehavior<AI::ArriveBehavior>();
 	mWanderBehavior = mSteeringModule->AddBehavior<AI::WanderBehavior>();
 	mPursuitBehavior = mSteeringModule->AddBehavior<AI::PursuitBehavior>();
+	mCohesionBehavior = mSteeringModule->AddBehavior<AI::CohesionBehavior>();
+	mAlignmentBehavior = mSteeringModule->AddBehavior<AI::AlignmentBehavior>();
+	mSeparationBehavior = mSteeringModule->AddBehavior<AI::SeparationBehavior>();
 
 	const float screenWidth = static_cast<float>(X::GetScreenWidth());
 	const float screenHeight = static_cast<float>(X::GetScreenHeight());
@@ -128,15 +131,15 @@ void SCV::SetPursuit(bool active)
 }
 void SCV::SetSeparation(bool active)
 {
-	//mSeparationBehavior->SetActive(active);
+	mSeparationBehavior->SetActive(active);
 }
 void SCV::SetAlignment(bool active)
 {
-	//mAlignmentBehavior->SetActive(active);
+	mAlignmentBehavior->SetActive(active);
 }
 void SCV::SetCohesion(bool active)
 {
-	//mCohesionBehavior->SetActive(active);
+	mCohesionBehavior->SetActive(active);
 }
 void SCV::SetEvade(bool active)
 {
