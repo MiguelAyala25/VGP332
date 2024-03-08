@@ -25,6 +25,7 @@ bool useCohesion = false;
 float wanderJitter = 5.0f;
 float wanderRadius = 20.0f;
 float wanderDistance = 50.0f;
+
 float radius = 50.0f;
 
 float viewRange = 300.0f;
@@ -251,6 +252,7 @@ bool GameLoop(float deltaTime)
 			ImGui::DragFloat("ViewRange", &viewRange, 1.0f, 100.0f, 1000.0f);
 			ImGui::DragFloat("ViewAngle", &viewAngle, 1.0f, 1.0f, 180.0f);
 		}
+		if (ImGui::DragFloat("ViewRange", &viewRange, 1.0f, 100.0f, 1000.0f));
 	}
 	ImGui::End();
 

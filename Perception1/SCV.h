@@ -1,6 +1,8 @@
 #pragma once
 #include "AI.h"
 
+class VisualSensor;
+
 class SCV : public AI::Agent
 {
 public:
@@ -36,6 +38,8 @@ public:
 
 	void SetEvadeWeight(float weight);
 private:
+
+	VisualSensor* mVisualSensor = nullptr;
 
 	std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
 	std::unique_ptr<AI::SteeringModule> mSteeringModule;

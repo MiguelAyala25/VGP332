@@ -2,6 +2,8 @@
 
 #include "TypeIds.h"
 
+#include "VisualSensor.h" 
+
 extern float wanderJitter;
 extern float wanderRadius;
 extern float wanderDistance;
@@ -24,6 +26,8 @@ void SCV::Load()
 {
 	mPerceptionModule = std::make_unique<AI::PerceptionModule>(*this,ComputerImportance);
 	mPerceptionModule->SetMemorySpan(2.0f);
+	mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
+	mVisualSensor->targetType = AgentType::Mineral;
 
 	mSteeringModule = std::make_unique<AI::SteeringModule>(*this);
 	mSeekBehavior = mSteeringModule->AddBehavior<AI::SeekBehavior>();
@@ -90,6 +94,17 @@ void SCV::Update(float deltaTime)
 	{
 		position.y -= screenHeight;
 	}
+
+	const auto& memoryRecords = mPerceptionModule->GetMemoryRecords();
+	for (auto& memory : memoryRecords)
+	{
+		X::Math::Vector2 pos = memory.GetProperty<X::Math::Vector2>("LastSeenPositon");
+		X::DrawScreenLine(position, pos, X::Colors::White);
+
+		std::string score = std::to_string(memory.importance);
+		X::DrawScreenText(score.c_str(), pos.x, pos.y, 12.0f, X::Colors::White);
+	}
+
 }
 
 void SCV::Render()
