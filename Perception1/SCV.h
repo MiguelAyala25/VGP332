@@ -40,6 +40,7 @@ public:
 private:
 
 	VisualSensor* mVisualSensor = nullptr;
+	VisualSensor* mVisualSensor2 = nullptr;
 
 	std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
 	std::unique_ptr<AI::SteeringModule> mSteeringModule;

@@ -8,12 +8,41 @@ extern float wanderJitter;
 extern float wanderRadius;
 extern float wanderDistance;
 
+extern float viewRange;
+extern float viewAngle;
+
 
 namespace
 {
 	float ComputerImportance(const AI::Agent& agent, const AI::MemoryRecord& record)
 	{
-		return 0;
+		float score = 0.0f;
+		AgentType entityType = static_cast<AgentType>(record.GetProperty<int>("type"));
+		switch (entityType)
+		{
+		case AgentType::Invalid:
+			score = 0.0f;
+			break;
+		case AgentType::SCV:
+		{
+			X::Math::Vector2 lastSeenPos = record.GetProperty<X::Math::Vector2>("lastSeenPosition");
+			float distance = X::Math::Distance(agent.position, lastSeenPos);
+			float distanceScore = std::max(500.0f - distance, 0.0f);
+			score = distanceScore;
+		}
+		break;
+		case AgentType::Mineral:
+		{
+			X::Math::Vector2 lastSeenPos = record.GetProperty<X::Math::Vector2>("lastSeenPosition");
+			float distance = X::Math::Distance(agent.position, lastSeenPos);
+			float distanceScore = std::max(1000.0f - distance, 0.0f);
+			score = distanceScore;
+		}
+		break;
+		default:
+			break;
+		}
+		return score;
 	}
 }
 
@@ -28,6 +57,8 @@ void SCV::Load()
 	mPerceptionModule->SetMemorySpan(2.0f);
 	mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
 	mVisualSensor->targetType = AgentType::Mineral;
+	mVisualSensor2 = mPerceptionModule->AddSensor<VisualSensor>();
+	mVisualSensor2->targetType = AgentType::SCV;
 
 	mSteeringModule = std::make_unique<AI::SteeringModule>(*this);
 	mSeekBehavior = mSteeringModule->AddBehavior<AI::SeekBehavior>();
@@ -57,7 +88,10 @@ void SCV::Unload()
 
 void SCV::Update(float deltaTime)
 {
-
+	mVisualSensor->viewRange = viewRange;
+	mVisualSensor->viewHalfAngle = viewAngle * X::Math::kDegToRad;
+	mVisualSensor2->viewRange = viewRange * 0.5;
+	mVisualSensor2->viewHalfAngle = viewAngle * X::Math::kDegToRad;
 
 	mPerceptionModule->Update(deltaTime);
 
