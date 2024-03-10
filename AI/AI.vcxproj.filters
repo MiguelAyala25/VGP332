@@ -28,6 +28,9 @@
     <Filter Include="Src\Perception">
       <UniqueIdentifier>{7507be3a-7476-4c3e-bb2a-7610cfd97e1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\GoalBasedDecision">
+      <UniqueIdentifier>{07e21628-e2ec-4163-a1aa-cbd3c7a42b33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h">
@@ -63,9 +66,6 @@
     <ClInclude Include="Inc\Agent.h">
       <Filter>Inc\Steering</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\AIWorld.h">
-      <Filter>Inc\Steering</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\SteeringBehavior.h">
       <Filter>Inc\Steering</Filter>
     </ClInclude>
@@ -99,6 +99,21 @@
     <ClInclude Include="Inc\Sensor.h">
       <Filter>Inc\Perception</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\AIWorld.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Goal.h">
+      <Filter>Inc\GoalBasedDecision</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Strategy.h">
+      <Filter>Inc\GoalBasedDecision</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GoalComposite.h">
+      <Filter>Inc\GoalBasedDecision</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DecisionModule.h">
+      <Filter>Inc\GoalBasedDecision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -122,9 +137,6 @@
     <ClCompile Include="Src\Entity.cpp">
       <Filter>Src\Steering</Filter>
     </ClCompile>
-    <ClCompile Include="Src\AIWorld.cpp">
-      <Filter>Src\Steering</Filter>
-    </ClCompile>
     <ClCompile Include="Src\SteeringModule.cpp">
       <Filter>Src\Steering</Filter>
     </ClCompile>
@@ -145,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="Src\Perception.cpp">
       <Filter>Src\Perception</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AIWorld.cpp">
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

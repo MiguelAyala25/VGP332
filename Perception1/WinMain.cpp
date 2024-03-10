@@ -78,10 +78,16 @@ void GameInit()
 		mineral->Initialize();
 	}
 
+	aiWorld.AddObstacle({ 230.0f, 300.0f, 50.0f });
 	X::Math::Vector2 topLeft(500.0f, 100.0f);
 	X::Math::Vector2 topRight(600.0f, 100.0f);
 	X::Math::Vector2 bottomLeft(500.0f, 600.0f);
 	X::Math::Vector2 bottomRight(600.0f, 600.0f);
+	aiWorld.AddWall({ topLeft, topRight });
+	aiWorld.AddWall({ topRight, bottomRight });
+	aiWorld.AddWall({ bottomLeft, bottomRight });
+	aiWorld.AddWall({ bottomLeft, topLeft });
+
 }
 
 bool GameLoop(float deltaTime)
@@ -291,7 +297,7 @@ bool GameLoop(float deltaTime)
 		mineral->Render();
 	}
 
-	/*const AIWorld::Obstacles& obstacles = aiWorld.GetObstacles();
+	const AIWorld::Obstacles& obstacles = aiWorld.GetObstacles();
 	for (const X::Math::Circle& obstacle : obstacles)
 	{
 
@@ -301,7 +307,7 @@ bool GameLoop(float deltaTime)
 	for (const X::Math::LineSegment& wall : walls)
 	{
 		X::DrawScreenLine(wall.from, wall.to, X::Colors::Gray);
-	}*/
+	}
 
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
 	return quit;
