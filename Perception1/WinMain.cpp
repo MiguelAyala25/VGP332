@@ -78,15 +78,10 @@ void GameInit()
 		mineral->Initialize();
 	}
 
-//	aiWorld.AddObstacle({ 230.0f, 300.0f, 50.0f });
 	X::Math::Vector2 topLeft(500.0f, 100.0f);
 	X::Math::Vector2 topRight(600.0f, 100.0f);
 	X::Math::Vector2 bottomLeft(500.0f, 600.0f);
 	X::Math::Vector2 bottomRight(600.0f, 600.0f);
-/*	aiWorld.AddWall({topLeft, topRight});
-	aiWorld.AddWall({ topRight, bottomRight });
-	aiWorld.AddWall({ bottomLeft, bottomRight });
-	aiWorld.AddWall({ bottomLeft, topLeft });*/
 }
 
 bool GameLoop(float deltaTime)
@@ -252,7 +247,6 @@ bool GameLoop(float deltaTime)
 			ImGui::DragFloat("ViewRange", &viewRange, 1.0f, 100.0f, 1000.0f);
 			ImGui::DragFloat("ViewAngle", &viewAngle, 1.0f, 1.0f, 180.0f);
 		}
-		if (ImGui::DragFloat("ViewRange", &viewRange, 1.0f, 100.0f, 1000.0f));
 	}
 	ImGui::End();
 

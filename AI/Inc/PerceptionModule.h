@@ -16,7 +16,7 @@ namespace AI
 		template<class SensorType>
 		SensorType* AddSensor()
 		{
-			static_assert(std::is_base_of_v<Sensor, SensorType>, "Must be a tyoe of sensor");
+			static_assert(std::is_base_of_v<Sensor, SensorType>, "Perception Module: sensor type must be of type Sensor");
 			auto& newSensor = mSensors.emplace_back(std::make_unique<SensorType>());
 			return static_cast<SensorType*>(newSensor.get());
 		}

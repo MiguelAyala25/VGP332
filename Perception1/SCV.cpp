@@ -55,6 +55,7 @@ void SCV::Load()
 {
 	mPerceptionModule = std::make_unique<AI::PerceptionModule>(*this,ComputerImportance);
 	mPerceptionModule->SetMemorySpan(2.0f);
+
 	mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
 	mVisualSensor->targetType = AgentType::Mineral;
 	mVisualSensor2 = mPerceptionModule->AddSensor<VisualSensor>();
@@ -90,9 +91,8 @@ void SCV::Update(float deltaTime)
 {
 	mVisualSensor->viewRange = viewRange;
 	mVisualSensor->viewHalfAngle = viewAngle * X::Math::kDegToRad;
-	mVisualSensor2->viewRange = viewRange * 0.5;
+	mVisualSensor2->viewRange = viewRange * -0.5;
 	mVisualSensor2->viewHalfAngle = viewAngle * X::Math::kDegToRad;
-
 	mPerceptionModule->Update(deltaTime);
 
 	if (mWanderBehavior != nullptr)
@@ -132,7 +132,7 @@ void SCV::Update(float deltaTime)
 	const auto& memoryRecords = mPerceptionModule->GetMemoryRecords();
 	for (auto& memory : memoryRecords)
 	{
-		X::Math::Vector2 pos = memory.GetProperty<X::Math::Vector2>("LastSeenPositon");
+		X::Math::Vector2 pos = memory.GetProperty<X::Math::Vector2>("lastSeenPosition");
 		X::DrawScreenLine(position, pos, X::Colors::White);
 
 		std::string score = std::to_string(memory.importance);
