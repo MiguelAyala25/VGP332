@@ -1,0 +1,7 @@
+﻿  Raven.cpp
+  SCV.cpp
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\DecisionMaking\SCV.cpp(94,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  VisualSensor.cpp
+  Generating Code...
+     Creating library C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.lib and object C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.exp
+  DecisionMaking.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.exe
