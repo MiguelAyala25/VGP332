@@ -1,14 +1,16 @@
-#include <XEngine.h> // <> for external includes, "" for internal includes
+#include <XEngine.h>
 #include <ImGui/Inc/imgui.h>
 #include <AI.h>
 
 #include "SCV.h"
+#include "Raven.h"
 #include "Mineral.h"
 
 using namespace AI;
 
 AIWorld aiWorld;
 std::vector<std::unique_ptr<SCV>> scvAgents;
+std::vector<std::unique_ptr<Raven>> ravenAgents;
 std::vector<std::unique_ptr<Mineral>> minerals;
 
 X::Math::Vector2 destination = X::Math::Vector2::Zero();
@@ -25,7 +27,6 @@ bool useCohesion = false;
 float wanderJitter = 5.0f;
 float wanderRadius = 20.0f;
 float wanderDistance = 50.0f;
-
 float radius = 50.0f;
 
 float viewRange = 300.0f;
@@ -63,9 +64,29 @@ void SpawnAgent()
 }
 void KillAgent()
 {
-	auto& agent = scvAgents.back();
+	auto& agent = ravenAgents.back();
 	agent->Unload();
-	scvAgents.pop_back();
+	ravenAgents.pop_back();
+}
+
+void SpawnRaven()
+{
+	auto& agent = ravenAgents.emplace_back(std::make_unique<Raven>(aiWorld));
+	agent->Load();
+
+	const float screenWidth = X::GetScreenWidth();
+	const float screenHeight = X::GetScreenHeight();
+	agent->position = X::RandomVector2({ 100.0f, 100.0f },
+		{ screenWidth - 100.0f, screenHeight - 100.0f });
+	agent->destination = destination;
+	agent->radius = radius;
+	agent->ShowDebug(showDebug);
+}
+void KillRaven()
+{
+	auto& agent = ravenAgents.back();
+	agent->Unload();
+	ravenAgents.pop_back();
 }
 
 void GameInit()
@@ -87,7 +108,6 @@ void GameInit()
 	aiWorld.AddWall({ topRight, bottomRight });
 	aiWorld.AddWall({ bottomLeft, bottomRight });
 	aiWorld.AddWall({ bottomLeft, topLeft });
-
 }
 
 bool GameLoop(float deltaTime)
@@ -98,13 +118,27 @@ bool GameLoop(float deltaTime)
 		{
 			SpawnAgent();
 		}
+		ImGui::SameLine();
 		if (ImGui::Button("KillAgent") && !scvAgents.empty())
 		{
 			KillAgent();
 		}
+		if (ImGui::Button("SpawnRaven"))
+		{
+			SpawnRaven();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("KillRaven") && !ravenAgents.empty())
+		{
+			KillRaven();
+		}
 		if (ImGui::Checkbox("ShowDebug", &showDebug))
 		{
 			for (auto& agent : scvAgents)
+			{
+				agent->ShowDebug(showDebug);
+			}
+			for (auto& agent : ravenAgents)
 			{
 				agent->ShowDebug(showDebug);
 			}
@@ -266,6 +300,10 @@ bool GameLoop(float deltaTime)
 		{
 			agent->destination = destination;
 		}
+		for (auto& agent : ravenAgents)
+		{
+			agent->SetTargetDestination(destination);
+		}
 	}
 
 	aiWorld.Update();
@@ -287,8 +325,16 @@ bool GameLoop(float deltaTime)
 	{
 		agent->Update(deltaTime);
 	}
+	for (auto& agent : ravenAgents)
+	{
+		agent->Update(deltaTime);
+	}
 
 	for (auto& agent : scvAgents)
+	{
+		agent->Render();
+	}
+	for (auto& agent : ravenAgents)
 	{
 		agent->Render();
 	}
@@ -320,11 +366,17 @@ void GameCleanup()
 		agent->Unload();
 		agent.reset();
 	}
+	for (auto& agent : ravenAgents)
+	{
+		agent->Unload();
+		agent.reset();
+	}
 	for (auto& mineral : minerals)
 	{
 		mineral.reset();
 	}
 	scvAgents.clear();
+	ravenAgents.clear();
 	minerals.clear();
 }
 

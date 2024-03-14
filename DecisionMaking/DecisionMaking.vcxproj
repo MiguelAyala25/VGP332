@@ -139,15 +139,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GoalArriveAtPosition.cpp" />
+    <ClCompile Include="GoalHarvestMineral.cpp" />
+    <ClCompile Include="GoalMoveToPosition.cpp" />
+    <ClCompile Include="GoalSeekToPositon.cpp" />
+    <ClCompile Include="GoalWander.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="Raven.cpp" />
+    <ClCompile Include="RavenGoToMineralStrategy.cpp" />
+    <ClCompile Include="RavenHuntStrategy.cpp" />
+    <ClCompile Include="RavenStrategy.cpp" />
     <ClCompile Include="SCV.cpp" />
     <ClCompile Include="VisualSensor.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GoalArriveAtPosition.h" />
+    <ClInclude Include="GoalHarvestMineral.h" />
+    <ClInclude Include="GoalMoveToPosition.h" />
+    <ClInclude Include="GoalSeekToPositon.h" />
+    <ClInclude Include="GoalWander.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="Raven.h" />
+    <ClInclude Include="RavenGoToMineralStrategy.h" />
+    <ClInclude Include="RavenHuntStrategy.h" />
+    <ClInclude Include="RavenStrategy.h" />
     <ClInclude Include="SCV.h" />
     <ClInclude Include="TypeIds.h" />
     <ClInclude Include="VisualSensor.h" />

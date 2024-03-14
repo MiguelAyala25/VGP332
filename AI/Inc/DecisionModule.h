@@ -33,13 +33,20 @@ namespace AI
 			if (mCurrentGoal != nullptr)
 			{
 				mCurrentGoal->Process(mAgent);
+				if (mCurrentGoal->GetStatus() == GoalType::Status::Completed ||
+					mCurrentGoal->GetStatus() == GoalType::Status::Failed)
+				{
+					mCurrentGoal->Terminate(mAgent);
+					mCurrentGoal.reset();
+					mCurrentStrategy = nullptr;
+				}
 			}
 		}
 
 	private:
 		void Arbitrate()
 		{
-			StrategyType& bestStrategy = nullptr;
+			StrategyType* bestStrategy = nullptr;
 			float mostDesirable = 0.0f;
 
 			for (auto& strategy : mStrategies)
