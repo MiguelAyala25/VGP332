@@ -1,2 +1,3 @@
-﻿     Creating library C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.lib and object C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.exp
-  DecisionMaking.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\DecisionMaking.exe
+﻿  GoalHarvestMineral.cpp
+C:\Users\LCV2242930.LCIEDUCATION.000\Documents\GitHub\VGP332\DecisionMaking\GoalHarvestMineral.cpp(36): warning C4715: 'GoalHarvestMineral::Process': not all control paths return a value
+  DecisionMaking.vcxproj -> C:\Users\LCV2242930.LCIEDUCATION.000\Documents\GitHub\VGP332\x64\Debug\DecisionMaking.exe

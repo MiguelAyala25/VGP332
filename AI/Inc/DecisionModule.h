@@ -33,8 +33,8 @@ namespace AI
 			if (mCurrentGoal != nullptr)
 			{
 				mCurrentGoal->Process(mAgent);
-				if (mCurrentGoal->GetStatus() == GoalType::Status::Completed ||
-					mCurrentGoal->GetStatus() == GoalType::Status::Failed)
+				if (mCurrentGoal->GetStatus() == GoalType::Status::Completed
+					|| mCurrentGoal->GetStatus() == GoalType::Status::Failed)
 				{
 					mCurrentGoal->Terminate(mAgent);
 					mCurrentGoal.reset();
@@ -65,6 +65,7 @@ namespace AI
 				if (mCurrentGoal != nullptr)
 				{
 					mCurrentGoal->Terminate(mAgent);
+					mCurrentGoal.reset();
 				}
 				if (mCurrentStrategy != nullptr)
 				{
