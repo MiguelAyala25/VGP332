@@ -1,17 +1,20 @@
 #include "RavenHarvestStrategy.h"
 #include "TypeIds.h"
 #include "GoalHarvestMineral.h"
+#include "Mineral.h"
 
 
 float RavenHarvestStrategy::CalculateDesirability(Raven& agent) const
 {
+
+	const Mineral* mineral = nullptr;
 	AI::EntityPtrs minerals = agent.world.GetEntitiesInRange({ agent.destination, 1.0f }, static_cast<uint32_t>(AgentType::Mineral));
 
 	if (!minerals.empty())
 	{
-		agent.target = static_cast<AI::Agent*>(minerals[0]);
+		mineral = static_cast<Mineral*>(minerals[0]);
 	}
-	if (agent.target != nullptr && agent.target->GetTypeId() == static_cast<uint32_t>(AgentType::Mineral))
+	if (mineral != nullptr && mineral->GetHealth()>0)
 	{
 		if (X::Math::DistanceSqr(agent.position, agent.destination) < 25.0f)
 		{

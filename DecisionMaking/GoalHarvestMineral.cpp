@@ -2,6 +2,8 @@
 #include "Mineral.h"
 #include "TypeIds.h"
 
+
+
 GoalHarvestMineral::GoalHarvestMineral()
 {
 
@@ -12,6 +14,32 @@ void GoalHarvestMineral::Activate(Raven& agent)
 }
 GoalHarvestMineral::Status GoalHarvestMineral::Process(Raven& agent)
 {
+
+	 Mineral* mineral = nullptr;
+	AI::EntityPtrs minerals = agent.world.GetEntitiesInRange({ agent.destination, 1.0f }, static_cast<uint32_t>(AgentType::Mineral));
+
+	if (!minerals.empty())
+	{
+		mineral = static_cast<Mineral*>(minerals[0]);
+	}
+	if (mineral == nullptr )
+	{
+		mStatus = GoalHarvestMineral::Status::Failed;
+	}
+	else if (mStartTime + 0.5f < X::GetTime())
+	{
+		mineral->SetHealth(0);
+		agent.target = nullptr;
+		mStatus = GoalHarvestMineral::Status::Completed;
+
+	}
+	return mStatus;
+
+
+
+
+
+	/*
 	Mineral* mineral = nullptr;
 	AI::EntityPtrs minerals = agent.world.GetEntitiesInRange({agent.destination, 1.0f}, static_cast<uint32_t>(AgentType::Mineral));
 	if (!minerals.empty())
@@ -29,10 +57,11 @@ GoalHarvestMineral::Status GoalHarvestMineral::Process(Raven& agent)
 		if (mineral != nullptr)
 		{
 			mineral->SetHealth(0);
+			agent.target = nullptr;
 		}
 		return mStatus;
 
-	}
+	}*/
 }
 
 void GoalHarvestMineral::Terminate(Raven& agent)
