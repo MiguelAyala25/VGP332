@@ -1,12 +1,1 @@
-﻿  TileMap.cpp
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(288,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(289,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(296,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(297,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(306,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\Pathfinding\TileMap.cpp(307,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  WinMain.cpp
-  Generating Code...
-  LINK : C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Pathfinding.exe not found or not built by the last incremental link; performing full link
-     Creating library C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Pathfinding.lib and object C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Pathfinding.exp
-  Pathfinding.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Pathfinding.exe
+﻿  Pathfinding.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\Pathfinding.exe

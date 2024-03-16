@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\TileMap">
+      <UniqueIdentifier>{4b5d66e3-4fa8-4934-8bdd-d12e0853a60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TileMap">
+      <UniqueIdentifier>{5f3b0f9f-4c06-4f7c-861c-e3290faf2db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Agents">
+      <UniqueIdentifier>{862d9595-cce5-4e48-8cf5-1c6ceecf4369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Agents">
+      <UniqueIdentifier>{faf530d4-a6b1-4c16-b994-01c90f30c1af}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Source Files\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Collector.cpp">
+      <Filter>Source Files\Agents</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="tiles.txt" />
+    <Text Include="map.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TileMap.h">
+      <Filter>Header Files\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Collector.h">
+      <Filter>Header Files\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeIds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

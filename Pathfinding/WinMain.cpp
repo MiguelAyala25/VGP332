@@ -66,7 +66,6 @@ bool GameLoop(float deltaTime)
 		{
 			path = tileMap.FindPathAStar(startX, startY, endX, endY);
 		}
-
 	}
 
 	ImGui::End();

@@ -1,20 +1,19 @@
 #include "Precompiled.h"
 #include "AStar.h"
 
-
 using namespace AI;
 
 bool AStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int endY, GetCost getCost, GetHeuristic getHeuristic)
 {
 	bool found = false;
 	graph.ResetSearchParams();
-
 	mOpenList.clear();
 	mClosedList.clear();
 
 	//add the start node to the open list
 	GridBasedGraph::Node* node = graph.getNode(startX, startY);
 	GridBasedGraph::Node* endNode = graph.getNode(endX, endY);
+
 	node->opened = true;
 	mOpenList.push_back(node);
 
@@ -26,10 +25,9 @@ bool AStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 	//do the search
 	while (!found && !mOpenList.empty())
 	{
-		// A *
+		///A*
 		node = mOpenList.front();
 		mOpenList.pop_front();
-
 
 		if (node->colum == endX && node->row == endY)
 		{
@@ -37,12 +35,14 @@ bool AStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 		}
 		else
 		{
+			//add neighbors to open list
 			for (GridBasedGraph::Node* neighbor : node->neighbours)
 			{
 				if (neighbor == nullptr || neighbor->closed)
 				{
 					continue;
 				}
+
 				float cost = node->cost + getCost(node, neighbor);
 				if (!neighbor->opened)
 				{
@@ -60,13 +60,21 @@ bool AStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 			}
 		}
 
+		mOpenList.sort(sortCost);
 
-
-		//add to closed list
+		//add node to closed list
 		mClosedList.push_back(node);
 		node->closed = true;
-
 	}
 
 	return found;
+}
+
+Path AStar::ReconstructPath(GridBasedGraph::Node* endNode) {
+	Path path;
+	for (GridBasedGraph::Node* node = endNode; node != nullptr; node = node->parent) {
+		path.push_back(GridToWorld(node->colum, node->row));
+	}
+	std::reverse(path.begin(), path.end());
+	return path;
 }
