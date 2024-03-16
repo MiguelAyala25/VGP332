@@ -192,6 +192,17 @@ bool TileMap::IsBaseTile(int x, int y) const
 	return mMap[index] == 1;
 }
 
+bool TileMap::CanSpawnResources(int x, int y) const
+{
+	if (x < 0 || x >= mColumns || y < 0 || y >= mRows)
+	{
+		return false;
+	}
+
+	const int index = ToIndex(x, y, mColumns);
+	return mMap[index] == 0;
+}
+
 bool TileMap::IsBlocked(int x, int y) const
 {
 	if (x >= 0 && x < mColumns &&

@@ -36,6 +36,9 @@
     <ClCompile Include="Collector.cpp">
       <Filter>Source Files\Agents</Filter>
     </ClCompile>
+    <ClCompile Include="Mineral.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="tiles.txt" />
@@ -49,6 +52,9 @@
       <Filter>Header Files\Agents</Filter>
     </ClInclude>
     <ClInclude Include="TypeIds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mineral.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

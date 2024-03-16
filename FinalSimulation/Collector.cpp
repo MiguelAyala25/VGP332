@@ -8,7 +8,7 @@ Collector::Collector(AI::AIWorld& world, TileMap& tileMap)
 
 void Collector::Initialize(const X::Math::Vector2& spawnPosition)
 {
-	mTextureId = X::LoadTexture("mushroom.png");
+	mTextureId = X::LoadTexture("scv_09.png");
 	position = spawnPosition;
 }
 

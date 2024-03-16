@@ -6,6 +6,9 @@
 //agents
 #include "Collector.h"
 
+//resources 
+#include "Mineral.h"
+
 using namespace AI;
 
 AIWorld aiWorld;
@@ -14,6 +17,10 @@ X::Math::Vector2 destination = X::Math::Vector2::Zero();
 //collectors 
 std::vector<std::unique_ptr<Collector>> collectorAgents;
 int numCollectors = 1;
+
+//Resoucers
+std::vector<std::unique_ptr<Mineral>> minerals;
+int mineralNum = 10;
 
 //tileMaps
 TileMap tileMap;
@@ -53,6 +60,31 @@ void InitializeAgents()
 	}
 }
 
+void InitalizeResources()
+{
+	std::vector<X::Math::Vector2> regularTilesPositions;
+
+	//Gets the "non-base tiles"
+	for (int y = 0; y < tileMap.getRows(); ++y) {
+		for (int x = 0; x < tileMap.getColumns(); ++x) {
+			if (tileMap.CanSpawnResources(x, y) == true) {
+				regularTilesPositions.push_back(tileMap.GetPixelPosition(x, y));
+			}
+		}
+	}
+	//Spawns the agents on random tiles inside the base tiles
+	for (int i = 0; i < mineralNum; ++i) {
+		if (!regularTilesPositions.empty()) {
+			int randomIndex = X::Random(0, static_cast<int>(regularTilesPositions.size()) - 1);
+			auto& collector = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
+			collector->Initialize(regularTilesPositions[randomIndex]);
+
+			regularTilesPositions.erase(regularTilesPositions.begin() + randomIndex);
+		}
+	}
+
+}
+
 void GameInit()
 {
 	aiWorld.Initialize();
@@ -60,26 +92,33 @@ void GameInit()
 	tileMap.LoadMap("map.txt");
 
 	InitializeAgents();
-
-	for (int i = 0; i < numCollectors; ++i)
+	InitalizeResources();
+	//set collectors to move to a position
+	/*for (int i = 0; i < numCollectors; ++i)
 	{
 		if (!collectorAgents.empty()) {
 			collectorAgents[i]->MoveTo(X::Math::Vector2{ endX * 32.0f + 16.0f, endY * 32.0f + 16.0f });
 		}
-	}
+	}*/
 }
 
 bool GameLoop(float deltaTime)
 {
 
-
 	tileMap.Render();
 
+	//agent updates
 	for (auto& agent : collectorAgents)
 	{
 		agent->Update(deltaTime);
 		agent->Render();
 	}
+	//resources update
+	for (auto& mineral : minerals)
+	{
+		mineral->Render();
+	}
+
 
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
 

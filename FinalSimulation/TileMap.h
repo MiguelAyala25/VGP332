@@ -23,6 +23,8 @@ public:
 	void Render() const;
 
 	bool IsBaseTile(int x, int y) const;
+	bool CanSpawnResources(int x, int y) const;
+
 	bool IsBlocked(int x, int y) const;
 	int getColumns() const { return mColumns; }
 	int getRows() const { return mRows; }
