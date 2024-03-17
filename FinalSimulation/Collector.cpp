@@ -10,6 +10,8 @@ void Collector::Initialize(const X::Math::Vector2& spawnPosition)
 {
 	mTextureId = X::LoadTexture("scv_09.png");
 	position = spawnPosition;
+    //save this to be able to return
+    Spawnposition = spawnPosition;
 }
 
 void Collector::Render()
@@ -22,6 +24,7 @@ void Collector::Update(float deltaTime)
     if (isMoving) {
         FollowPath(deltaTime);
     }
+    CheckForMinerals();
 }
 
 void Collector::MoveTo(const X::Math::Vector2& targetPosition)
@@ -54,3 +57,19 @@ void Collector::FollowPath(float deltaTime)
     }
 }
   
+void Collector::CheckForMinerals() {
+    auto collectorTilePos = tileMap.WorldToGrid(position.x, position.y);
+
+    for (auto it = minerals->begin(); it != minerals->end();) {
+        auto mineralTilePos = tileMap.WorldToGrid((*it)->GetPosition().x, (*it)->GetPosition().y);
+        if (collectorTilePos == mineralTilePos) {
+            it = minerals->erase(it);
+            //will replace spawposition to the pos of another mineral later
+            MoveTo(Spawnposition);
+            break;
+        }
+        else {
+            ++it;
+        }
+    }
+}

@@ -163,7 +163,7 @@ void TileMap::Render() const
 		}
 	}
 	//draw the search branches
-	for (int y = 0; y < mRows; ++y)
+ for (int y = 0; y < mRows; ++y)
 	{
 		for (int x = 0; x < mColumns; ++x)
 		{

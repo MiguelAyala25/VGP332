@@ -1,8 +1,8 @@
-﻿  WinMain.cpp
+﻿  Collector.cpp
 C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(48,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'WinMain.cpp')
+  (compiling source file 'Collector.cpp')
   
 C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(49,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'WinMain.cpp')
+  (compiling source file 'Collector.cpp')
   
   FinalSimulation.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FinalSimulation.exe

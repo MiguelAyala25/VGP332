@@ -62,7 +62,11 @@ void InitializeAgents()
 
 void InitalizeResources()
 {
-	std::vector<X::Math::Vector2> regularTilesPositions;
+	auto& mineral = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
+	// Coloca el mineral cerca del objetivo final para simplificar
+	mineral->Initialize(tileMap.GetPixelPosition(endX, endY));
+
+	/*std::vector<X::Math::Vector2> regularTilesPositions;
 
 	//Gets the "non-base tiles"
 	for (int y = 0; y < tileMap.getRows(); ++y) {
@@ -81,7 +85,7 @@ void InitalizeResources()
 
 			regularTilesPositions.erase(regularTilesPositions.begin() + randomIndex);
 		}
-	}
+	}*/
 
 }
 
@@ -93,6 +97,12 @@ void GameInit()
 
 	InitializeAgents();
 	InitalizeResources();
+
+	if (!collectorAgents.empty()) {
+		collectorAgents[0]->SetMineralsReference(minerals);
+		collectorAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
+	}
+
 	//set collectors to move to a position
 	/*for (int i = 0; i < numCollectors; ++i)
 	{
@@ -118,7 +128,6 @@ bool GameLoop(float deltaTime)
 	{
 		mineral->Render();
 	}
-
 
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
 
