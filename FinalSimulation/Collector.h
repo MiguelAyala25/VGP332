@@ -5,17 +5,16 @@
 #include "TileMap.h" 
 #include "Mineral.h"
 
-class VisualSensor;
 
 class Collector : public AI::Entity
 {
 public:
 	Collector(AI::AIWorld& world, TileMap& tileMap);
 
-	void Initialize(const X::Math::Vector2& spawnPosition);
-	void Render();
+	virtual void Initialize(const X::Math::Vector2& spawnPosition);
+	virtual void Update(float deltaTime);
 
-	void Update(float deltaTime); 
+	void Render();
 	void MoveTo(const X::Math::Vector2& targetPosition);
 	void CheckForMinerals();
 
@@ -25,7 +24,7 @@ public:
 		minerals = &mineralsRef;
 	}
 
-private:
+protected:
 	X::TextureId mTextureId;
 	TileMap& tileMap;
 
@@ -37,5 +36,5 @@ private:
 	bool isMoving = false;
 	float timeSinceLastMove = 0.0f;
 
-	void FollowPath(float deltaTime);
+	virtual void FollowPath(float deltaTime);
 };

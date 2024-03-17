@@ -39,6 +39,9 @@
     <ClCompile Include="Mineral.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Explorer.cpp">
+      <Filter>Source Files\Agents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="tiles.txt" />
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="Mineral.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Explorer.h">
+      <Filter>Header Files\Agents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

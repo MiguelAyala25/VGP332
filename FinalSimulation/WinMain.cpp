@@ -5,6 +5,7 @@
 
 //agents
 #include "Collector.h"
+#include "Explorer.h"
 
 //resources 
 #include "Mineral.h"
@@ -18,6 +19,10 @@ X::Math::Vector2 destination = X::Math::Vector2::Zero();
 std::vector<std::unique_ptr<Collector>> collectorAgents;
 int numCollectors = 1;
 
+//explorers
+std::vector<std::unique_ptr<Explorer>> explorerAgents;
+int numExplorers = 1;
+
 //Resoucers
 std::vector<std::unique_ptr<Mineral>> minerals;
 int mineralNum = 10;
@@ -28,10 +33,7 @@ X::TextureId textureId;
 X::Math::Vector2 position;
 Path path;
 
-
-
-
-int endX = 15;
+int endX = 12;
 int endY = 11;
 
 
@@ -56,6 +58,11 @@ void InitializeAgents()
 			collector->Initialize(baseTilesPositions[randomIndex]);
 
 			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
+
+			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap));
+			explorer->Initialize(baseTilesPositions[randomIndex]);
+
+			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
 		}
 	}
 }
@@ -63,15 +70,14 @@ void InitializeAgents()
 void InitalizeResources()
 {
 	auto& mineral = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
-	// Coloca el mineral cerca del objetivo final para simplificar
-	mineral->Initialize(tileMap.GetPixelPosition(endX, endY));
+	mineral->Initialize(tileMap.GetPixelPosition(endX, 15));
 
 	/*std::vector<X::Math::Vector2> regularTilesPositions;
 
 	//Gets the "non-base tiles"
 	for (int y = 0; y < tileMap.getRows(); ++y) {
 		for (int x = 0; x < tileMap.getColumns(); ++x) {
-			if (tileMap.CanSpawnResources(x, y) == true) {
+			if (tileMap.IsCommonTile(x, y) == true) {
 				regularTilesPositions.push_back(tileMap.GetPixelPosition(x, y));
 			}
 		}
@@ -102,7 +108,10 @@ void GameInit()
 		collectorAgents[0]->SetMineralsReference(minerals);
 		collectorAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
 	}
-
+	if (!explorerAgents.empty()) {
+		
+		explorerAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
+	}
 	//set collectors to move to a position
 	/*for (int i = 0; i < numCollectors; ++i)
 	{
@@ -120,9 +129,16 @@ bool GameLoop(float deltaTime)
 	//agent updates
 	for (auto& agent : collectorAgents)
 	{
+		//agent->Update(deltaTime);
+		//agent->Render();
+	}
+
+	for (auto& agent : explorerAgents)
+	{
 		agent->Update(deltaTime);
 		agent->Render();
 	}
+
 	//resources update
 	for (auto& mineral : minerals)
 	{

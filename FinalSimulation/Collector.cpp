@@ -43,7 +43,7 @@ void Collector::FollowPath(float deltaTime)
 {
     timeSinceLastMove += deltaTime;
 
-    if (timeSinceLastMove >= 1.0f) {
+    if (timeSinceLastMove >= .2f) {
         if (currentPathIndex < currentPath.size()) {
             const X::Math::Vector2& nextPoint = currentPath[currentPathIndex];
             position = nextPoint;

@@ -192,7 +192,7 @@ bool TileMap::IsBaseTile(int x, int y) const
 	return mMap[index] == 1;
 }
 
-bool TileMap::CanSpawnResources(int x, int y) const
+bool TileMap::IsCommonTile(int x, int y) const
 {
 	if (x < 0 || x >= mColumns || y < 0 || y >= mRows)
 	{
