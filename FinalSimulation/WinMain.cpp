@@ -101,6 +101,8 @@ void GameInit()
 	tileMap.LoadTiles("tiles.txt");
 	tileMap.LoadMap("map.txt");
 
+	tileMap.InitializeTileWeights();
+
 	InitializeAgents();
 	InitalizeResources();
 
@@ -124,7 +126,7 @@ void GameInit()
 bool GameLoop(float deltaTime)
 {
 
-	tileMap.Render();
+	tileMap.Render(true);
 
 	//agent updates
 	for (auto& agent : collectorAgents)

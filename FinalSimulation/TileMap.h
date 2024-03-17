@@ -20,7 +20,7 @@ public:
 	void LoadTiles(const char* fileName);
 	void LoadMap(const char* fileName);
 
-	void Render() const;
+	void Render(bool debug) const;
 
 	bool IsBaseTile(int x, int y) const;
 	bool IsCommonTile(int x, int y) const;
@@ -37,12 +37,13 @@ public:
 	Path FindPathDijkstra(int startX, int startY, int endX, int endY);
 	Path FindPathAStar(int startX, int startY, int endX, int endY);
 
+
+	//tile functions
 	std::pair<int, int> WorldToGrid(float worldX, float worldY) const {
 		int gridX = static_cast<int>(worldX / 32);
 		int gridY = static_cast<int>(worldY / 32);
 		return { gridX, gridY };
 	}
-
 
 	X::Math::Vector2 GridToWorld(int gridX, int gridY) const {
 		float worldX = (gridX * 32) + 16;
@@ -50,7 +51,24 @@ public:
 		return X::Math::Vector2{ worldX, worldY };
 	}
 
+	void InitializeTileWeights() {
+		tileWeights = std::vector<std::vector<int>>(getRows(), std::vector<int>(getColumns(), 0));
+	}
+	void IncreaseTileWeight(int x, int y) {
+		if (x >= 0 && x < getColumns() && y >= 0 && y < getRows()) {
+			tileWeights[y][x]++;
+		}
+	}
+	int GetTileWeight(int x, int y) const {
+		if (x >= 0 && x < getColumns() && y >= 0 && y < getRows()) {
+			return tileWeights[y][x];
+		}
+		return -1;
+	}
+
 private:
+	//tileWeigts 
+	std::vector<std::vector<int>> tileWeights;
 
 	AI::GridBasedGraph mGraph;
 	std::vector<int> mMap;

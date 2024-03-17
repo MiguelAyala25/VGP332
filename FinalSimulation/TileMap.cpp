@@ -127,7 +127,7 @@ void TileMap::LoadMap(const char* fileName)
 	
 }
 
-void TileMap::Render() const
+void TileMap::Render(bool debug) const
 {
 	// Draw the map using mTiles and mMap
 	X::Math::Vector2 position;
@@ -144,40 +144,57 @@ void TileMap::Render() const
 		position.y += mTileheight; // Move to the next row position vertically.
 	}
 
-	// Draw debug drawnode
-	for (int y = 0; y < mRows; ++y)
+	if (debug)
 	{
-		for (int x = 0; x < mColumns; ++x)
+		// Draw debug drawnode
+		for (int y = 0; y < mRows; ++y)
 		{
-			const GridBasedGraph::Node* node = mGraph.getNode(x, y);
-			for (const GridBasedGraph::Node* neighbor : node->neighbours)
+			for (int x = 0; x < mColumns; ++x)
 			{
-				if (neighbor != nullptr)
+				const GridBasedGraph::Node* node = mGraph.getNode(x, y);
+				for (const GridBasedGraph::Node* neighbor : node->neighbours)
 				{
-					const X::Math::Vector2 a = GetPixelPosition(node->colum, node->row);
-					const X::Math::Vector2 b = GetPixelPosition(neighbor->colum, neighbor->row);
+					if (neighbor != nullptr)
+					{
+						const X::Math::Vector2 a = GetPixelPosition(node->colum, node->row);
+						const X::Math::Vector2 b = GetPixelPosition(neighbor->colum, neighbor->row);
 
-					X::DrawScreenLine(a, b, X::Colors::Blue);
+						X::DrawScreenLine(a, b, X::Colors::Blue);
+					}
 				}
 			}
 		}
-	}
-	//draw the search branches
- for (int y = 0; y < mRows; ++y)
-	{
-		for (int x = 0; x < mColumns; ++x)
+		//draw the search branches
+		for (int y = 0; y < mRows; ++y)
 		{
-			const GridBasedGraph::Node* node = mGraph.getNode(x, y);
-			
-			if (node->parent != nullptr)
+			for (int x = 0; x < mColumns; ++x)
 			{
-				const X::Math::Vector2 a = GetPixelPosition(node->colum, node->row);
-				const X::Math::Vector2 b = GetPixelPosition(node->parent->colum, node->parent->row);
+				const GridBasedGraph::Node* node = mGraph.getNode(x, y);
 
-				X::DrawScreenLine(a, b, X::Colors::White);
+				if (node->parent != nullptr)
+				{
+					const X::Math::Vector2 a = GetPixelPosition(node->colum, node->row);
+					const X::Math::Vector2 b = GetPixelPosition(node->parent->colum, node->parent->row);
+
+					X::DrawScreenLine(a, b, X::Colors::White);
+				}
+
 			}
-			
 		}
+
+		//draw tile weights 
+		for (int y = 0; y < getRows(); ++y) {
+			for (int x = 0; x < getColumns(); ++x) {
+				if (IsCommonTile(x, y)) {
+					X::DrawScreenText(std::to_string(tileWeights[y][x]).c_str(),
+						GetPixelPosition(x, y).x,
+						GetPixelPosition(x, y).y,
+						15,
+						X::Colors::Black);
+				}
+			}
+		}
+
 	}
 }
 
