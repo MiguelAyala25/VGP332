@@ -2,7 +2,6 @@
 
 using namespace AI;
 
-
 namespace
 {
 	// Converts 2D grid coordinates (x, y) to a single index for a 1D array representation.
@@ -165,7 +164,7 @@ void TileMap::Render(bool debug) const
 			}
 		}
 		//draw the search branches
-		for (int y = 0; y < mRows; ++y)
+		/*for (int y = 0; y < mRows; ++y)
 		{
 			for (int x = 0; x < mColumns; ++x)
 			{
@@ -180,7 +179,7 @@ void TileMap::Render(bool debug) const
 				}
 
 			}
-		}
+		}*/
 
 		//draw tile weights 
 		for (int y = 0; y < getRows(); ++y) {
@@ -368,6 +367,7 @@ Path TileMap::FindPathAStar(int startX, int startY, int endX, int endY)
 	}
 	return path;
 }
+
 
 //How to convert a 2d array into a 1d array.
 

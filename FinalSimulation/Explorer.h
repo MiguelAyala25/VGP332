@@ -15,9 +15,16 @@ public:
 
    void FollowPath(float deltaTime) override;
 
+   void MoveTo(const X::Math::Vector2& targetPosition) override;
+
     //Explorer methods
     void Wander();
     void DiscoverResources();
+
+
+    const Path& GetCurrentPath() const {
+        return currentPath;
+    }
 
 private:
     X::Math::Vector2 velocity;

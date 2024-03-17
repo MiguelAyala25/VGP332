@@ -17,7 +17,7 @@ X::Math::Vector2 destination = X::Math::Vector2::Zero();
 
 //collectors 
 std::vector<std::unique_ptr<Collector>> collectorAgents;
-int numCollectors = 1;
+int numCollectors = 2;
 
 //explorers
 std::vector<std::unique_ptr<Explorer>> explorerAgents;
@@ -36,10 +36,13 @@ Path path;
 int endX = 12;
 int endY = 11;
 
+int endX1 = 7;
+int endY1 = 12;
 
 //--------------------------------------------------
 void InitializeAgents()
 {
+
 	std::vector<X::Math::Vector2> baseTilesPositions;
 	//Gets the "Base tiles"
 	for (int y = 0; y < tileMap.getRows(); ++y) {
@@ -56,8 +59,6 @@ void InitializeAgents()
 			int randomIndex = X::Random(0, static_cast<int>(baseTilesPositions.size()) - 1);
 			auto& collector = collectorAgents.emplace_back(std::make_unique<Collector>(aiWorld, tileMap));
 			collector->Initialize(baseTilesPositions[randomIndex]);
-
-			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
 
 			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap));
 			explorer->Initialize(baseTilesPositions[randomIndex]);
@@ -109,11 +110,19 @@ void GameInit()
 	if (!collectorAgents.empty()) {
 		collectorAgents[0]->SetMineralsReference(minerals);
 		collectorAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
+
+		collectorAgents[1]->SetMineralsReference(minerals);
+		collectorAgents[1]->MoveTo(tileMap.GetPixelPosition(endX1, endY));
 	}
-	if (!explorerAgents.empty()) {
-		
-		explorerAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
-	}
+
+	//move explorers
+	/*for (int i = 0; i < numCollectors; ++i)
+	{
+		if (!explorerAgents.empty()) {
+			explorerAgents[i]->MoveTo(X::Math::Vector2{ endX * 32.0f + 16.0f, endY * 32.0f + 16.0f });
+		}
+	}*/
+
 	//set collectors to move to a position
 	/*for (int i = 0; i < numCollectors; ++i)
 	{
@@ -131,15 +140,15 @@ bool GameLoop(float deltaTime)
 	//agent updates
 	for (auto& agent : collectorAgents)
 	{
-		//agent->Update(deltaTime);
-		//agent->Render();
-	}
-
-	for (auto& agent : explorerAgents)
-	{
 		agent->Update(deltaTime);
 		agent->Render();
 	}
+
+	/*for (auto& agent : explorerAgents)
+	{
+		agent->Update(deltaTime);
+		agent->Render();
+	}*/
 
 	//resources update
 	for (auto& mineral : minerals)

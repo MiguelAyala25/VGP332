@@ -85,3 +85,14 @@ void Explorer::Wander()
     }
 }
 
+void Explorer::MoveTo(const X::Math::Vector2& targetPosition)
+{
+    auto [startX, startY] = tileMap.WorldToGrid(position.x, position.y);
+    auto [endX, endY] = tileMap.WorldToGrid(targetPosition.x, targetPosition.y);
+
+    currentPath = tileMap.FindPathAStar(startX, startY, endX, endY);
+    if (!currentPath.empty()) {
+        isMoving = true;
+        currentPathIndex = 0;
+    }
+}

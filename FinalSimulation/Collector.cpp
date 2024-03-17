@@ -17,6 +17,7 @@ void Collector::Initialize(const X::Math::Vector2& spawnPosition)
 void Collector::Render()
 {
 	X::DrawSprite(mTextureId, position);
+    DrawPath();
 }
 
 void Collector::Update(float deltaTime)
@@ -71,5 +72,15 @@ void Collector::CheckForMinerals() {
         else {
             ++it;
         }
+    }
+}
+
+void Collector::DrawPath() {
+    if (currentPath.size() < 2) return; // Si el camino tiene menos de dos puntos, no hay nada que dibujar.
+
+    for (size_t i = 0; i < currentPath.size() - 1; ++i) {
+        const auto& from = currentPath[i];
+        const auto& to = currentPath[i + 1];
+        X::DrawScreenLine(from, to, X::Colors::Yellow); // Cambia el color si lo deseas.
     }
 }

@@ -15,8 +15,10 @@ public:
 	virtual void Update(float deltaTime);
 
 	void Render();
-	void MoveTo(const X::Math::Vector2& targetPosition);
+	virtual void MoveTo(const X::Math::Vector2& targetPosition);
 	void CheckForMinerals();
+
+	void DrawPath();
 
 	//minerals reference
 	std::vector<std::unique_ptr<Mineral>>* minerals;

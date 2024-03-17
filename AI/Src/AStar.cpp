@@ -70,11 +70,3 @@ bool AStar::Run(GridBasedGraph& graph, int startX, int startY, int endX, int end
 	return found;
 }
 
-Path AStar::ReconstructPath(GridBasedGraph::Node* endNode) {
-	Path path;
-	for (GridBasedGraph::Node* node = endNode; node != nullptr; node = node->parent) {
-		path.push_back(GridToWorld(node->colum, node->row));
-	}
-	std::reverse(path.begin(), path.end());
-	return path;
-}

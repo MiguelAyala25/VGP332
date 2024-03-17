@@ -37,6 +37,7 @@ public:
 	Path FindPathDijkstra(int startX, int startY, int endX, int endY);
 	Path FindPathAStar(int startX, int startY, int endX, int endY);
 
+	void DrawPath(const Path& path, const X::Math::Vector4& color);
 
 	//tile functions
 	std::pair<int, int> WorldToGrid(float worldX, float worldY) const {
