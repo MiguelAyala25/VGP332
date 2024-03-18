@@ -112,7 +112,15 @@ void GameInit()
 		collectorAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
 
 		collectorAgents[1]->SetMineralsReference(minerals);
-		collectorAgents[1]->MoveTo(tileMap.GetPixelPosition(endX1, endY));
+		collectorAgents[1]->MoveTo(tileMap.GetPixelPosition(endX, 12));
+	}
+
+	if (!explorerAgents.empty()) {
+		explorerAgents[0]->SetMineralsReference(minerals);
+		explorerAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, 15));
+
+		explorerAgents[1]->SetMineralsReference(minerals);
+		explorerAgents[1]->MoveTo(tileMap.GetPixelPosition(endX1, endY));
 	}
 
 	//move explorers
@@ -130,6 +138,7 @@ void GameInit()
 			collectorAgents[i]->MoveTo(X::Math::Vector2{ endX * 32.0f + 16.0f, endY * 32.0f + 16.0f });
 		}
 	}*/
+
 }
 
 bool GameLoop(float deltaTime)
@@ -144,11 +153,11 @@ bool GameLoop(float deltaTime)
 		agent->Render();
 	}
 
-	/*for (auto& agent : explorerAgents)
+	for (auto& agent : explorerAgents)
 	{
 		agent->Update(deltaTime);
 		agent->Render();
-	}*/
+	}
 
 	//resources update
 	for (auto& mineral : minerals)

@@ -2,7 +2,7 @@
 #include "TypeIds.h"
 
 Collector::Collector(AI::AIWorld& world, TileMap& tileMap)
-	: Entity(world, static_cast<uint32_t>(AgentType::Collector)), tileMap(tileMap)
+	: Agent(world, static_cast<uint32_t>(AgentType::Collector)), tileMap(tileMap)
 {
 }
 
@@ -65,7 +65,6 @@ void Collector::CheckForMinerals() {
         auto mineralTilePos = tileMap.WorldToGrid((*it)->GetPosition().x, (*it)->GetPosition().y);
         if (collectorTilePos == mineralTilePos) {
             it = minerals->erase(it);
-            //will replace spawposition to the pos of another mineral later
             MoveTo(Spawnposition);
             break;
         }
@@ -76,11 +75,11 @@ void Collector::CheckForMinerals() {
 }
 
 void Collector::DrawPath() {
-    if (currentPath.size() < 2) return; // Si el camino tiene menos de dos puntos, no hay nada que dibujar.
+    if (currentPath.size() < 2) return; //if path less than 2 points dont draw
 
     for (size_t i = 0; i < currentPath.size() - 1; ++i) {
         const auto& from = currentPath[i];
         const auto& to = currentPath[i + 1];
-        X::DrawScreenLine(from, to, X::Colors::Yellow); // Cambia el color si lo deseas.
+        X::DrawScreenLine(from, to, X::Colors::Yellow);
     }
 }

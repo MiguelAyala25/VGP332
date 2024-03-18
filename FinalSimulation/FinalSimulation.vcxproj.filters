@@ -42,6 +42,9 @@
     <ClCompile Include="Explorer.cpp">
       <Filter>Source Files\Agents</Filter>
     </ClCompile>
+    <ClCompile Include="VisualSensor.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="tiles.txt" />
@@ -62,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="Explorer.h">
       <Filter>Header Files\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualSensor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -143,6 +143,7 @@
     <ClCompile Include="Explorer.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="VisualSensor.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TypeIds.h" />
+    <ClInclude Include="VisualSensor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="map.txt" />

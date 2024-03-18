@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Collector.h"
+#include "VisualSensor.h"
+#include "PerceptionModule.h"
 
 class VisualSensor;
 
@@ -28,4 +30,7 @@ public:
 
 private:
     X::Math::Vector2 velocity;
+    //perception
+    std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
+    VisualSensor* mVisualSensor = nullptr;
 };

@@ -1,11 +1,44 @@
 #include "Explorer.h"
+#include "TypeIds.h"
+
+namespace {
+    float ComputerImportance(const AI::Agent& agent, const AI::MemoryRecord& record)
+    {
+        float score = 0.0f;
+        AgentType entityType = static_cast<AgentType>(record.GetProperty<int>("type"));
+        switch (entityType)
+        {
+        case AgentType::Invalid:
+            score = 0.0f;
+            break;
+        case AgentType::Mineral:
+        {
+            X::Math::Vector2 lastSeenPos = record.GetProperty<X::Math::Vector2>("lastSeenPosition");
+            float distance = X::Math::Distance(agent.position, lastSeenPos);
+            float distanceScore = std::max(1000.0f - distance, 0.0f);
+            score = distanceScore;
+        }
+        break;
+        default:
+            break;
+        }
+        return score;
+    }
+}
+
 
 void Explorer::Initialize(const X::Math::Vector2& spawnPosition)
 {
-	mTextureId = X::LoadTexture("interceptor_01.png");
-	position = spawnPosition;
-	//save this to be able to return
-	Spawnposition = spawnPosition;
+    mTextureId = X::LoadTexture("interceptor_01.png");
+    position = spawnPosition;
+    //save this to be able to return
+    Spawnposition = spawnPosition;
+
+    mPerceptionModule = std::make_unique<AI::PerceptionModule>(*this, ComputerImportance);
+    mPerceptionModule->SetMemorySpan(2.0f);
+
+    mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
+    mVisualSensor->targetType = AgentType::Mineral;
 }
 
 void Explorer::Update(float deltaTime)
@@ -13,6 +46,12 @@ void Explorer::Update(float deltaTime)
 	if (isMoving) {
 		FollowPath(deltaTime);
 	}
+
+    mVisualSensor->viewRange = 50;
+    mVisualSensor->viewHalfAngle = 360 * X::Math::kDegToRad;
+    mPerceptionModule->Update(deltaTime);
+
+    DiscoverResources();
 }
 
 void Explorer::FollowPath(float deltaTime)
@@ -82,6 +121,19 @@ void Explorer::Wander()
 
         MoveTo(tileMap.GridToWorld(chosenX, chosenY));
         tileMap.IncreaseTileWeight(chosenX, chosenY);
+    }
+}
+
+void Explorer::DiscoverResources()
+{
+    const auto& memoryRecords = mPerceptionModule->GetMemoryRecords();
+    for (auto& memory : memoryRecords)
+    {
+        X::Math::Vector2 pos = memory.GetProperty<X::Math::Vector2>("lastSeenPosition");
+        X::DrawScreenLine(position, pos, X::Colors::White);
+
+        std::string score = std::to_string(memory.importance);
+        X::DrawScreenText(score.c_str(), pos.x, pos.y, 12.0f, X::Colors::White);
     }
 }
 

@@ -5,8 +5,9 @@
 #include "TileMap.h" 
 #include "Mineral.h"
 
+class VisualSensor;
 
-class Collector : public AI::Entity
+class Collector : public AI::Agent
 {
 public:
 	Collector(AI::AIWorld& world, TileMap& tileMap);
@@ -39,4 +40,8 @@ protected:
 	float timeSinceLastMove = 0.0f;
 
 	virtual void FollowPath(float deltaTime);
+
+	//perception
+	VisualSensor* mVisualSensor = nullptr;
+
 };
