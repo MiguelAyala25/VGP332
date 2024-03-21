@@ -8,10 +8,16 @@ Collector::Collector(AI::AIWorld& world, TileMap& tileMap)
 
 void Collector::Initialize(const X::Math::Vector2& spawnPosition)
 {
-	mTextureId = X::LoadTexture("scv_09.png");
-	position = spawnPosition;
-    //save this to be able to return
+    mTextureId = X::LoadTexture("scv_09.png");
+    position = spawnPosition;
     Spawnposition = spawnPosition;
+
+    mStateMachine.AddState<IdleState>();
+    mStateMachine.AddState<RecollectingState>();
+    mStateMachine.AddState<ReturningHomeState>();
+
+    mStateMachine.Initialize(this);
+    mStateMachine.ChangeState(static_cast<int>(CollectorState::Idle));
 }
 
 void Collector::Render()
@@ -22,10 +28,7 @@ void Collector::Render()
 
 void Collector::Update(float deltaTime)
 {
-    if (isMoving) {
-        FollowPath(deltaTime);
-    }
-    CheckForMinerals();
+    mStateMachine.Update(deltaTime);
 }
 
 void Collector::MoveTo(const X::Math::Vector2& targetPosition)
@@ -82,4 +85,19 @@ void Collector::DrawPath() {
         const auto& to = currentPath[i + 1];
         X::DrawScreenLine(from, to, X::Colors::Yellow);
     }
+}
+
+bool Collector::RemoveMineralAtPosition(const X::Math::Vector2& position) {
+    for (auto it = minerals->begin(); it != minerals->end(); ++it) {
+        // Obtiene la posición del mineral actual en el iterador
+        const auto& mineralPos = (*it)->GetPosition();
+
+        // Compara las coordenadas x e y con la posición dada
+        if (mineralPos.x == position.x && mineralPos.y == position.y) {
+            // Si coincide, elimina el mineral y devuelve true
+            minerals->erase(it);
+            return true; // Mineral encontrado y eliminado
+        }
+    }
+    return false; // No se encontró un mineral en la posición dada
 }

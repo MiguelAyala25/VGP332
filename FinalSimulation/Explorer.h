@@ -6,6 +6,13 @@
 
 class VisualSensor;
 
+//Explorer states
+enum class ExplorerState {
+    Idle,
+    Exploring,
+    Returning
+};
+
 class Explorer : public Collector {
 public:
     Explorer(AI::AIWorld& world, TileMap& tileMap)
@@ -33,4 +40,7 @@ private:
     //perception
     std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
     VisualSensor* mVisualSensor = nullptr;
+
+    //state machine 
+    AI::StateMachine<Explorer> mStateMachine;
 };

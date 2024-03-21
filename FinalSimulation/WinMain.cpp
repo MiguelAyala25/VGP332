@@ -17,7 +17,7 @@ X::Math::Vector2 destination = X::Math::Vector2::Zero();
 
 //collectors 
 std::vector<std::unique_ptr<Collector>> collectorAgents;
-int numCollectors = 2;
+int numCollectors = 1;
 
 //explorers
 std::vector<std::unique_ptr<Explorer>> explorerAgents;
@@ -58,7 +58,9 @@ void InitializeAgents()
 		if (!baseTilesPositions.empty()) {
 			int randomIndex = X::Random(0, static_cast<int>(baseTilesPositions.size()) - 1);
 			auto& collector = collectorAgents.emplace_back(std::make_unique<Collector>(aiWorld, tileMap));
+			collector->SetMineralsReference(minerals);
 			collector->Initialize(baseTilesPositions[randomIndex]);
+
 
 			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap));
 			explorer->Initialize(baseTilesPositions[randomIndex]);
@@ -107,44 +109,17 @@ void GameInit()
 	InitializeAgents();
 	InitalizeResources();
 
-	if (!collectorAgents.empty()) {
-		collectorAgents[0]->SetMineralsReference(minerals);
-		collectorAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, endY));
-
-		collectorAgents[1]->SetMineralsReference(minerals);
-		collectorAgents[1]->MoveTo(tileMap.GetPixelPosition(endX, 12));
+	if (!collectorAgents.empty() && !minerals.empty()) {
+		auto mineralPosition = minerals.front()->GetPosition();
+		collectorAgents.front()->SetTargetMineralPosition(mineralPosition);
 	}
-
-	if (!explorerAgents.empty()) {
-		explorerAgents[0]->SetMineralsReference(minerals);
-		explorerAgents[0]->MoveTo(tileMap.GetPixelPosition(endX, 15));
-
-		explorerAgents[1]->SetMineralsReference(minerals);
-		explorerAgents[1]->MoveTo(tileMap.GetPixelPosition(endX1, endY));
-	}
-
-	//move explorers
-	/*for (int i = 0; i < numCollectors; ++i)
-	{
-		if (!explorerAgents.empty()) {
-			explorerAgents[i]->MoveTo(X::Math::Vector2{ endX * 32.0f + 16.0f, endY * 32.0f + 16.0f });
-		}
-	}*/
-
-	//set collectors to move to a position
-	/*for (int i = 0; i < numCollectors; ++i)
-	{
-		if (!collectorAgents.empty()) {
-			collectorAgents[i]->MoveTo(X::Math::Vector2{ endX * 32.0f + 16.0f, endY * 32.0f + 16.0f });
-		}
-	}*/
 
 }
 
 bool GameLoop(float deltaTime)
 {
 
-	tileMap.Render(true);
+	tileMap.Render(false);
 
 	//agent updates
 	for (auto& agent : collectorAgents)

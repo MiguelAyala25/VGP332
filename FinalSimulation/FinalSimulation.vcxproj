@@ -140,7 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collector.cpp" />
+    <ClCompile Include="CollectorStates.cpp" />
     <ClCompile Include="Explorer.cpp" />
+    <ClCompile Include="ExplorerStates.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="VisualSensor.cpp" />
@@ -148,7 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collector.h" />
+    <ClInclude Include="CollectorStates.h" />
     <ClInclude Include="Explorer.h" />
+    <ClInclude Include="ExplorerStates.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TypeIds.h" />

@@ -1,5 +1,6 @@
 #include "Explorer.h"
 #include "TypeIds.h"
+#include "ExplorerStates.h"
 
 namespace {
     float ComputerImportance(const AI::Agent& agent, const AI::MemoryRecord& record)
@@ -39,6 +40,10 @@ void Explorer::Initialize(const X::Math::Vector2& spawnPosition)
 
     mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
     mVisualSensor->targetType = AgentType::Mineral;
+
+    mStateMachine.AddState<ExplorerExploringState>();
+    mStateMachine.ChangeState(static_cast<int>(ExplorerState::Idle));
+
 }
 
 void Explorer::Update(float deltaTime)
