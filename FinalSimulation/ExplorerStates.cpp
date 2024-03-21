@@ -67,13 +67,15 @@ void ExplorerExploringState::Enter(Explorer& agent)
 
 void ExplorerExploringState::Update(Explorer& agent, float deltaTime)
 {
-    if (agent.GetBackHomeStatus())
-    {
+    if (agent.GetBackHomeStatus()) {
         agent.GetExplorerStateMachine().ChangeState(static_cast<int>(ExplorerState::Returning));
     }
-    else
-    {
-        agent.Wander();
+    else {
+        // Aquí se decide si se necesita elegir un nuevo destino.
+        if (!agent.IsMoving() || agent.HasReachedDestination()) { // Asumiendo que tienes una forma de verificar si ha llegado al destino.
+            agent.Wander(); // Esto establecería el nuevo destino.
+            agent.MoveTo(agent.GetNextWanderDestination()); // Esto inicia el movimiento hacia el destino.
+        }
     }
 }
 

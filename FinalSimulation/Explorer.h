@@ -38,6 +38,9 @@ public:
     void SetBackHomeStatus(bool SetBackHomeStatus) { backHomeStatus = SetBackHomeStatus; }
 
     //test
+    X::Math::Vector2 GetNextWanderDestination() const { return nextWanderDestination; }
+
+    bool HasReachedDestination();
 
 private:
     bool backHomeStatus = false;
@@ -47,4 +50,6 @@ private:
 
     //state machine 
     AI::StateMachine<Explorer> mStateMachine;
+
+    X::Math::Vector2 nextWanderDestination;
 };

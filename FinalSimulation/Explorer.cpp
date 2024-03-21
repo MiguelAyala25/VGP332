@@ -55,6 +55,9 @@ void Explorer::Initialize(const X::Math::Vector2& spawnPosition)
 void Explorer::Update(float deltaTime)
 {
     mStateMachine.Update(deltaTime);
+    FollowPath(deltaTime);
+
+    DiscoverResources();
 
     //sensor 
     mVisualSensor->viewRange = 50;
@@ -127,8 +130,9 @@ void Explorer::Wander()
     //Rnadom chose in best tiles
     if (!bestTiles.empty()) {
         auto [chosenX, chosenY] = bestTiles[rand() % bestTiles.size()];
+        nextWanderDestination = tileMap.GridToWorld(chosenX, chosenY);
 
-        MoveTo(tileMap.GridToWorld(chosenX, chosenY));
+        MoveTo(nextWanderDestination);
         tileMap.IncreaseTileWeight(chosenX, chosenY);
     }
 }
@@ -156,4 +160,11 @@ void Explorer::MoveTo(const X::Math::Vector2& targetPosition)
         isMoving = true;
         currentPathIndex = 0;
     }
+}
+
+bool Explorer::HasReachedDestination() {
+    // Verifica si el agente ha llegado a su destino (puedes ajustar el umbral según sea necesario)
+    const float distanceThreshold = 10.0f; // Umbral de distancia para considerar que ha llegado
+    float distanceToDestination = X::Math::Distance(position, nextWanderDestination);
+    return distanceToDestination < distanceThreshold;
 }
