@@ -33,20 +33,20 @@ public:
     void SetMineralsReference(std::vector<std::unique_ptr<Mineral>>& mineralsRef) {
         minerals = &mineralsRef;
     }
-    void SetTargetMineralPosition(const X::Math::Vector2& position) {
-        targetMineralPosition = position;
+    void SetTargetPosition(const X::Math::Vector2& position) {
+        targetPosition = position;
         hasTarget = true;
     }
     std::vector<std::unique_ptr<Mineral>>& GetMinerals() {return *minerals;}
     bool RemoveMineralAtPosition(const X::Math::Vector2& position);
     // State Management
-    AI::StateMachine<Collector>& GetStateMachine() { return mStateMachine; }
+    virtual AI::StateMachine<Collector>& GetStateMachine() { return mStateMachine; }
 
     // Accessors
     X::Math::Vector2 GetSpawnposition() { return Spawnposition; }
     void SetHasTarget(bool targetAcitve) { hasTarget = targetAcitve; }
     bool HasTarget() const { return hasTarget; }
-    const X::Math::Vector2& GetTargetMineralPosition() const { return targetMineralPosition; }
+    const X::Math::Vector2& GetTargetPosition() const { return targetPosition; }
 
 protected:
     // Rendering
@@ -64,7 +64,7 @@ protected:
 
     // Target and Mineral Management
     std::vector<std::unique_ptr<Mineral>>* minerals;
-    X::Math::Vector2 targetMineralPosition = X::Math::Vector2::Zero();
+    X::Math::Vector2 targetPosition = X::Math::Vector2::Zero();
     bool hasTarget = false;
 
     // State Machine

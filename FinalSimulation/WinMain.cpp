@@ -39,6 +39,8 @@ int endY = 11;
 int endX1 = 7;
 int endY1 = 12;
 
+X::Math::Vector2 TestPosition = (endX,endY);
+
 //--------------------------------------------------
 void InitializeAgents()
 {
@@ -57,11 +59,12 @@ void InitializeAgents()
 	for (int i = 0; i < numCollectors; ++i) {
 		if (!baseTilesPositions.empty()) {
 			int randomIndex = X::Random(0, static_cast<int>(baseTilesPositions.size()) - 1);
+			//collectors
 			auto& collector = collectorAgents.emplace_back(std::make_unique<Collector>(aiWorld, tileMap));
 			collector->SetMineralsReference(minerals);
 			collector->Initialize(baseTilesPositions[randomIndex]);
 
-
+			//explorers
 			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap));
 			explorer->Initialize(baseTilesPositions[randomIndex]);
 
@@ -111,7 +114,13 @@ void GameInit()
 
 	if (!collectorAgents.empty() && !minerals.empty()) {
 		auto mineralPosition = minerals.front()->GetPosition();
-		collectorAgents.front()->SetTargetMineralPosition(mineralPosition);
+		collectorAgents.front()->SetTargetPosition(mineralPosition);
+	}
+
+
+	if (!explorerAgents.empty() && !minerals.empty()) {
+		//auto mineralPosition = minerals.front()->GetPosition();
+		explorerAgents.front()->SetTargetPosition(TestPosition);
 	}
 
 }

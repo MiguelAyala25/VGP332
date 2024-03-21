@@ -28,6 +28,7 @@ namespace {
 }
 
 
+
 void Explorer::Initialize(const X::Math::Vector2& spawnPosition)
 {
     mTextureId = X::LoadTexture("interceptor_01.png");
@@ -41,22 +42,25 @@ void Explorer::Initialize(const X::Math::Vector2& spawnPosition)
     mVisualSensor = mPerceptionModule->AddSensor<VisualSensor>();
     mVisualSensor->targetType = AgentType::Mineral;
 
-    mStateMachine.AddState<ExplorerExploringState>();
+    mStateMachine.AddState<ExplorerIdleState>();
+    mStateMachine.AddState<ExplorerMovingToPositionState>(); 
+    mStateMachine.AddState<ExplorerExploringState>(); 
+    mStateMachine.AddState<ExplorerReturningHomeState>(); 
+
+    mStateMachine.Initialize(this);
     mStateMachine.ChangeState(static_cast<int>(ExplorerState::Idle));
 
 }
 
 void Explorer::Update(float deltaTime)
 {
-	if (isMoving) {
-		FollowPath(deltaTime);
-	}
+    mStateMachine.Update(deltaTime);
 
+    //sensor 
     mVisualSensor->viewRange = 50;
     mVisualSensor->viewHalfAngle = 360 * X::Math::kDegToRad;
     mPerceptionModule->Update(deltaTime);
 
-    DiscoverResources();
 }
 
 void Explorer::FollowPath(float deltaTime)
@@ -71,7 +75,6 @@ void Explorer::FollowPath(float deltaTime)
 
             if (currentPathIndex >= currentPath.size()) {
                 isMoving = false;
-                Wander();
             }
             timeSinceLastMove = 0.0f;
         }

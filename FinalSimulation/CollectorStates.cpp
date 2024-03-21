@@ -8,7 +8,7 @@ void IdleState::Enter(Collector& agent) {
 
 void IdleState::Update(Collector& agent, float deltaTime) {
     if (agent.HasTarget()) {
-        agent.GetStateMachine().ChangeState(static_cast<int>(CollectorState::Recollecting));
+       agent.GetStateMachine().ChangeState(static_cast<int>(CollectorState::Recollecting));
     }
 }
 
@@ -24,7 +24,7 @@ void IdleState::DebugUI() {
 //Recollecting state
 
 void RecollectingState::Enter(Collector& agent) {
-    agent.MoveTo(agent.GetTargetMineralPosition());
+    agent.MoveTo(agent.GetTargetPosition());
 }
 
 void RecollectingState::Update(Collector& agent, float deltaTime) {
@@ -32,7 +32,7 @@ void RecollectingState::Update(Collector& agent, float deltaTime) {
         agent.FollowPath(deltaTime);
     }
     else {
-        const auto& targetPos = agent.GetTargetMineralPosition();
+        const auto& targetPos = agent.GetTargetPosition();
         if (agent.RemoveMineralAtPosition(targetPos)) {
             agent.SetHasTarget(false); //If there is no objetive
             agent.GetStateMachine().ChangeState(static_cast<int>(CollectorState::Returning)); //change to returning

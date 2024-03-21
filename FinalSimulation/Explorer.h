@@ -9,6 +9,7 @@ class VisualSensor;
 //Explorer states
 enum class ExplorerState {
     Idle,
+    MovingToPosition,
     Exploring,
     Returning
 };
@@ -29,11 +30,10 @@ public:
     //Explorer methods
     void Wander();
     void DiscoverResources();
-
-
     const Path& GetCurrentPath() const {
         return currentPath;
     }
+    AI::StateMachine<Explorer>& GetExplorerStateMachine() { return mStateMachine; }
 
 private:
     X::Math::Vector2 velocity;
