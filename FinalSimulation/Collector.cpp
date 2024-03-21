@@ -4,7 +4,6 @@
 Collector::Collector(AI::AIWorld& world, TileMap& tileMap)
 	: Agent(world, static_cast<uint32_t>(AgentType::Collector)), tileMap(tileMap)
 {
-
 }
 
 void Collector::Initialize(const X::Math::Vector2& spawnPosition)

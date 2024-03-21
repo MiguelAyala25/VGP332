@@ -39,7 +39,7 @@ int endY = 11;
 int endX1 = 7;
 int endY1 = 12;
 
-X::Math::Vector2 TestPosition = (endX,endY);
+X::Math::Vector2 TestPosition = (400,496);
 
 //--------------------------------------------------
 void InitializeAgents()
@@ -149,6 +149,20 @@ bool GameLoop(float deltaTime)
 		mineral->Render();
 	}
 
+	
+	ImGui::Begin("Steering", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+	{
+		if (ImGui::Button("BackHome"))
+		{
+			for (auto& agent : explorerAgents)
+			{
+				agent->SetBackHomeStatus(true);
+			}
+		}
+	}
+
+	ImGui::End();
+	
 	const bool quit = X::IsKeyPressed(X::Keys::ESCAPE);
 
 	return quit;

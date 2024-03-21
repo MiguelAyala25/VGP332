@@ -1,12 +1,13 @@
 #include "ExplorerStates.h"
 #include "Explorer.h"
 
-#include <cmath> // Include for std::abs
+#include <cmath>
 #include "XEngine.h" 
+
+#include <ImGui/Inc/imgui.h>
 
 void ExplorerIdleState::Enter(Explorer& agent)
 {
-
 }
 
 void ExplorerIdleState::Update(Explorer& agent, float deltaTime)
@@ -28,6 +29,7 @@ void ExplorerIdleState::DebugUI()
 
 void ExplorerMovingToPositionState::Enter(Explorer& agent)
 {
+    agent.setIsMoving(true);
     agent.MoveTo(agent.GetTargetPosition());
 }
 
@@ -43,7 +45,7 @@ void ExplorerMovingToPositionState::Update(Explorer& agent, float deltaTime)
             std::abs(agent.position.y - targetPos.y) < tolerance)
         {
             agent.SetHasTarget(false);
-            agent.GetStateMachine().ChangeState(static_cast<int>(ExplorerState::Exploring));
+            agent.GetExplorerStateMachine().ChangeState(static_cast<int>(ExplorerState::Exploring));
         }
     }
 }
@@ -56,6 +58,7 @@ void ExplorerMovingToPositionState::DebugUI()
 {
 }
 
+
 //exploring State
 
 void ExplorerExploringState::Enter(Explorer& agent)
@@ -64,6 +67,14 @@ void ExplorerExploringState::Enter(Explorer& agent)
 
 void ExplorerExploringState::Update(Explorer& agent, float deltaTime)
 {
+    if (agent.GetBackHomeStatus())
+    {
+        agent.GetExplorerStateMachine().ChangeState(static_cast<int>(ExplorerState::Returning));
+    }
+    else
+    {
+        agent.Wander();
+    }
 }
 
 void ExplorerExploringState::Exit(Explorer& agent)
@@ -78,10 +89,18 @@ void ExplorerExploringState::DebugUI()
 
 void ExplorerReturningHomeState::Enter(Explorer& agent)
 {
+    agent.MoveTo(agent.GetSpawnposition());
+
 }
 
 void ExplorerReturningHomeState::Update(Explorer& agent, float deltaTime)
 {
+    if (agent.IsMoving()) {
+        agent.FollowPath(deltaTime);
+    }
+    else {
+        agent.GetExplorerStateMachine().ChangeState(static_cast<int>(ExplorerState::Idle));
+    }
 }
 
 void ExplorerReturningHomeState::Exit(Explorer& agent)

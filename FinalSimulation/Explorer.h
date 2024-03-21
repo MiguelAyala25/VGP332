@@ -30,13 +30,17 @@ public:
     //Explorer methods
     void Wander();
     void DiscoverResources();
-    const Path& GetCurrentPath() const {
-        return currentPath;
-    }
-    AI::StateMachine<Explorer>& GetExplorerStateMachine() { return mStateMachine; }
+
+    //get
+    const Path& GetCurrentPath() const { return currentPath;}
+    AI::StateMachine<Explorer>& GetExplorerStateMachine() { return mStateMachine;}
+    bool GetBackHomeStatus() { return backHomeStatus; }
+    void SetBackHomeStatus(bool SetBackHomeStatus) { backHomeStatus = SetBackHomeStatus; }
+
+    //test
 
 private:
-    X::Math::Vector2 velocity;
+    bool backHomeStatus = false;
     //perception
     std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
     VisualSensor* mVisualSensor = nullptr;

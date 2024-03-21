@@ -1,16 +1,1 @@
-﻿  Explorer.cpp
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(50,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'Explorer.cpp')
-  
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(51,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'Explorer.cpp')
-  
-  ExplorerStates.cpp
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(50,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'ExplorerStates.cpp')
-  
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(51,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'ExplorerStates.cpp')
-  
-  Generating Code...
-  FinalSimulation.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FinalSimulation.exe
+﻿  FinalSimulation.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FinalSimulation.exe

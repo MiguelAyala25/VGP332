@@ -75,6 +75,7 @@ void Explorer::FollowPath(float deltaTime)
 
             if (currentPathIndex >= currentPath.size()) {
                 isMoving = false;
+               // Wander();
             }
             timeSinceLastMove = 0.0f;
         }

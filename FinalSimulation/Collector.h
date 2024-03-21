@@ -47,6 +47,7 @@ public:
     void SetHasTarget(bool targetAcitve) { hasTarget = targetAcitve; }
     bool HasTarget() const { return hasTarget; }
     const X::Math::Vector2& GetTargetPosition() const { return targetPosition; }
+    void setIsMoving(bool IsMoving) { isMoving = IsMoving; }
 
 protected:
     // Rendering

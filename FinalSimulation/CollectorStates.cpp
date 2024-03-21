@@ -50,12 +50,10 @@ void RecollectingState::DebugUI() {
 
 //going back state
 void ReturningHomeState::Enter(Collector& agent) {
-    // Al entrar en este estado, el agente comienza a moverse hacia su posición inicial
     agent.MoveTo(agent.GetSpawnposition());
 }
 
 void ReturningHomeState::Update(Collector& agent, float deltaTime) {
-    // Continúa moviéndote hacia la posición inicial
     if (agent.IsMoving()) {
         agent.FollowPath(deltaTime);
     }
