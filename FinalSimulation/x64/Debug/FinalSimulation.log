@@ -5,5 +5,5 @@ C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(50,16
 C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\TileMap.h(51,16): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'WinMain.cpp')
   
-C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\WinMain.cpp(42,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\FinalSimulation\WinMain.cpp(48,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   FinalSimulation.vcxproj -> C:\Users\tlacu\source\repos\MiguelAyala25\VGP332\x64\Debug\FinalSimulation.exe

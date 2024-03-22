@@ -3,6 +3,7 @@
 #include "Collector.h"
 #include "VisualSensor.h"
 #include "PerceptionModule.h"
+#include "AgentManager.h"
 
 class VisualSensor;
 
@@ -16,8 +17,8 @@ enum class ExplorerState {
 
 class Explorer : public Collector {
 public:
-    Explorer(AI::AIWorld& world, TileMap& tileMap)
-        : Collector(world, tileMap) {}
+    Explorer(AI::AIWorld& world, TileMap& tileMap, AgentManager& agentManager)
+        : Collector(world, tileMap), agentManager(agentManager) {}
 
     //Collector methods 
     void Initialize(const X::Math::Vector2& spawnPosition) override;
@@ -50,6 +51,9 @@ private:
 
     //state machine 
     AI::StateMachine<Explorer> mStateMachine;
-
     X::Math::Vector2 nextWanderDestination;
+
+    //agent manager 
+    AgentManager& agentManager;
+
 };

@@ -42,14 +42,17 @@
     <ClCompile Include="Explorer.cpp">
       <Filter>Source Files\Agents</Filter>
     </ClCompile>
-    <ClCompile Include="VisualSensor.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="CollectorStates.cpp">
       <Filter>Source Files\Agents</Filter>
     </ClCompile>
     <ClCompile Include="ExplorerStates.cpp">
       <Filter>Source Files\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="VisualSensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="ExplorerStates.h">
       <Filter>Header Files\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

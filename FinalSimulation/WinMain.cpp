@@ -10,6 +10,12 @@
 //resources 
 #include "Mineral.h"
 
+//manager
+#include "AgentManager.h"
+
+AgentManager agentManager;
+
+
 using namespace AI;
 
 AIWorld aiWorld;
@@ -17,7 +23,7 @@ X::Math::Vector2 destination = X::Math::Vector2::Zero();
 
 //collectors 
 std::vector<std::unique_ptr<Collector>> collectorAgents;
-int numCollectors = 1;
+int numCollectors = 5;
 
 //explorers
 std::vector<std::unique_ptr<Explorer>> explorerAgents;
@@ -25,7 +31,7 @@ int numExplorers = 1;
 
 //Resoucers
 std::vector<std::unique_ptr<Mineral>> minerals;
-int mineralNum = 10;
+int mineralNum = 30;
 
 //tileMaps
 TileMap tileMap;
@@ -44,6 +50,7 @@ X::Math::Vector2 TestPosition = (400,496);
 //--------------------------------------------------
 void InitializeAgents()
 {
+
 
 	std::vector<X::Math::Vector2> baseTilesPositions;
 	//Gets the "Base tiles"
@@ -65,20 +72,19 @@ void InitializeAgents()
 			collector->Initialize(baseTilesPositions[randomIndex]);
 
 			//explorers
-			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap));
+			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap, agentManager));
 			explorer->Initialize(baseTilesPositions[randomIndex]);
 
 			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
 		}
 	}
+	agentManager.SetCollectorAgents(collectorAgents);
 }
 
 void InitalizeResources()
 {
-	auto& mineral = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
-	mineral->Initialize(tileMap.GetPixelPosition(endX, 15));
 
-	/*std::vector<X::Math::Vector2> regularTilesPositions;
+	std::vector<X::Math::Vector2> regularTilesPositions;
 
 	//Gets the "non-base tiles"
 	for (int y = 0; y < tileMap.getRows(); ++y) {
@@ -97,7 +103,7 @@ void InitalizeResources()
 
 			regularTilesPositions.erase(regularTilesPositions.begin() + randomIndex);
 		}
-	}*/
+	}
 
 }
 
@@ -112,17 +118,12 @@ void GameInit()
 	InitializeAgents();
 	InitalizeResources();
 
-	if (!collectorAgents.empty() && !minerals.empty()) {
-		auto mineralPosition = minerals.front()->GetPosition();
-		collectorAgents.front()->SetTargetPosition(mineralPosition);
-	}
+	agentManager.SetMinerals(minerals);
 
 
 	if (!explorerAgents.empty() && !minerals.empty()) {
-		//auto mineralPosition = minerals.front()->GetPosition();
 		explorerAgents.front()->SetTargetPosition(TestPosition);
 	}
-
 }
 
 bool GameLoop(float deltaTime)
@@ -149,9 +150,11 @@ bool GameLoop(float deltaTime)
 		mineral->Render();
 	}
 
-	
+
 	ImGui::Begin("Steering", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	{
+		//ImGui::Text("Discovered Minerals: %d", agentManager.GetDiscoveredCounter());
+
 		if (ImGui::Button("BackHome"))
 		{
 			for (auto& agent : explorerAgents)
@@ -159,7 +162,12 @@ bool GameLoop(float deltaTime)
 				agent->SetBackHomeStatus(true);
 			}
 		}
+		if (ImGui::Button("GiveMineral"))
+		{
+			agentManager.AssignMineralToCollector();	
+		}
 	}
+
 
 	ImGui::End();
 	

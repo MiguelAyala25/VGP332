@@ -60,22 +60,6 @@ void Collector::FollowPath(float deltaTime)
         }
     }
 }
-  
-void Collector::CheckForMinerals() {
-    auto collectorTilePos = tileMap.WorldToGrid(position.x, position.y);
-
-    for (auto it = minerals->begin(); it != minerals->end();) {
-        auto mineralTilePos = tileMap.WorldToGrid((*it)->GetPosition().x, (*it)->GetPosition().y);
-        if (collectorTilePos == mineralTilePos) {
-            it = minerals->erase(it);
-            MoveTo(Spawnposition);
-            break;
-        }
-        else {
-            ++it;
-        }
-    }
-}
 
 void Collector::DrawPath() {
     if (currentPath.size() < 2) return; //if path less than 2 points dont draw
@@ -89,15 +73,12 @@ void Collector::DrawPath() {
 
 bool Collector::RemoveMineralAtPosition(const X::Math::Vector2& position) {
     for (auto it = minerals->begin(); it != minerals->end(); ++it) {
-        // Obtiene la posición del mineral actual en el iterador
         const auto& mineralPos = (*it)->GetPosition();
 
-        // Compara las coordenadas x e y con la posición dada
-        if (mineralPos.x == position.x && mineralPos.y == position.y) {
-            // Si coincide, elimina el mineral y devuelve true
-            minerals->erase(it);
-            return true; // Mineral encontrado y eliminado
+        if (mineralPos.x == position.x && mineralPos.y == position.y && (*it)->IsDiscovered()) {
+            (*it)->Collect();
+            return true;
         }
     }
-    return false; // No se encontró un mineral en la posición dada
+    return false;
 }

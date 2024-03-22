@@ -14,5 +14,8 @@ void Mineral::Initialize(const X::Math::Vector2& spawnPosition)
 
 void Mineral::Render()
 {
-	X::DrawSprite(mTextureId, position);
+	if (!IsCollected())
+	{
+		X::DrawSprite(mTextureId, position);
+	}
 }

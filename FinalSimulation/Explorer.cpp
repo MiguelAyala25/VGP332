@@ -140,13 +140,15 @@ void Explorer::Wander()
 void Explorer::DiscoverResources()
 {
     const auto& memoryRecords = mPerceptionModule->GetMemoryRecords();
-    for (auto& memory : memoryRecords)
-    {
+    for (auto& memory : memoryRecords) {
         X::Math::Vector2 pos = memory.GetProperty<X::Math::Vector2>("lastSeenPosition");
-        X::DrawScreenLine(position, pos, X::Colors::White);
 
-        std::string score = std::to_string(memory.importance);
-        X::DrawScreenText(score.c_str(), pos.x, pos.y, 12.0f, X::Colors::White);
+        for (auto& mineral : agentManager.GetMinerals()) {
+            if (mineral->GetPosition().x == pos.x && mineral->GetPosition().y == pos.y && !mineral->IsDiscovered()) {
+                mineral->SetDiscovered(true);
+                break;
+            }
+        }
     }
 }
 
@@ -163,8 +165,7 @@ void Explorer::MoveTo(const X::Math::Vector2& targetPosition)
 }
 
 bool Explorer::HasReachedDestination() {
-    // Verifica si el agente ha llegado a su destino (puedes ajustar el umbral según sea necesario)
-    const float distanceThreshold = 10.0f; // Umbral de distancia para considerar que ha llegado
+    const float distanceThreshold = 10.0f; 
     float distanceToDestination = X::Math::Distance(position, nextWanderDestination);
     return distanceToDestination < distanceThreshold;
 }
