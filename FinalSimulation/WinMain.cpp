@@ -115,9 +115,8 @@ void GameInit()
 
 	tileMap.InitializeTileWeights();
 
-	InitializeAgents();
 	InitalizeResources();
-
+	InitializeAgents();
 	agentManager.SetMinerals(minerals);
 
 
@@ -153,8 +152,12 @@ bool GameLoop(float deltaTime)
 
 	ImGui::Begin("Steering", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	{
-		//ImGui::Text("Discovered Minerals: %d", agentManager.GetDiscoveredCounter());
+		ImGui::Text("Minerals: %d", agentManager.GetNumCollectedMinerals());
+		if (ImGui::Button("Add minerals"))
+		{
+			InitalizeResources();
 
+		}
 		if (ImGui::Button("BackHome"))
 		{
 			for (auto& agent : explorerAgents)

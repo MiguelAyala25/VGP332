@@ -20,3 +20,17 @@ void AgentManager::SetCollectorAgents(const std::vector<std::unique_ptr<Collecto
         collectorAgents.push_back(collector.get());
     }
 }
+
+int AgentManager::GetNumCollectedMinerals()
+{
+    int collectedMinerals = 0;
+
+    for (auto& mineral : *minerals) {
+        if (mineral->IsCollected())
+        {
+            ++collectedMinerals;
+        }
+    }
+    return collectedMinerals;
+}
+

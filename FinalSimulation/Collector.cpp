@@ -74,7 +74,6 @@ void Collector::DrawPath() {
 bool Collector::RemoveMineralAtPosition(const X::Math::Vector2& position) {
     for (auto it = minerals->begin(); it != minerals->end(); ++it) {
         const auto& mineralPos = (*it)->GetPosition();
-
         if (mineralPos.x == position.x && mineralPos.y == position.y && (*it)->IsDiscovered()) {
             (*it)->Collect();
             return true;
