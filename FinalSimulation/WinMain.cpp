@@ -27,7 +27,7 @@ int numCollectors = 5;
 
 //explorers
 std::vector<std::unique_ptr<Explorer>> explorerAgents;
-int numExplorers = 1;
+int numExplorers = 2;
 
 //Resoucers
 std::vector<std::unique_ptr<Mineral>> minerals;
@@ -45,12 +45,31 @@ int endY = 11;
 int endX1 = 7;
 int endY1 = 12;
 
-X::Math::Vector2 TestPosition = (400,496);
 
+float mineralReductionTimer = 0.0f;
+const float reductionInterval = 10.0f;
+
+
+bool showDebug = false;
 //--------------------------------------------------
+
+X::Math::Vector2 GenerateRandomNonBaseTilePosition(TileMap& tileMap)
+{
+	std::vector<X::Math::Vector2> nonBaseTilePositions;
+
+	for (int y = 0; y < tileMap.getRows(); ++y) {
+		for (int x = 0; x < tileMap.getColumns(); ++x) {
+			if (tileMap.IsCommonTile(x, y)) {
+				nonBaseTilePositions.push_back(tileMap.GetPixelPosition(x, y));
+			}
+		}
+	}
+	int randomIndex = X::Random(0, static_cast<int>(nonBaseTilePositions.size()) - 1);
+	return nonBaseTilePositions[randomIndex];
+}
+
 void InitializeAgents()
 {
-
 
 	std::vector<X::Math::Vector2> baseTilesPositions;
 	//Gets the "Base tiles"
@@ -71,38 +90,32 @@ void InitializeAgents()
 			collector->SetMineralsReference(minerals);
 			collector->Initialize(baseTilesPositions[randomIndex]);
 
+			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
+		}
+	}
+	for (int i = 0; i < numExplorers; ++i) {
+		if (!baseTilesPositions.empty()) {
+			int randomIndex = X::Random(0, static_cast<int>(baseTilesPositions.size()) - 1);
+
 			//explorers
 			auto& explorer = explorerAgents.emplace_back(std::make_unique<Explorer>(aiWorld, tileMap, agentManager));
 			explorer->Initialize(baseTilesPositions[randomIndex]);
+			explorer->SetTargetPosition(GenerateRandomNonBaseTilePosition(tileMap));
 
 			baseTilesPositions.erase(baseTilesPositions.begin() + randomIndex);
 		}
 	}
+
 	agentManager.SetCollectorAgents(collectorAgents);
 }
 
 void InitalizeResources()
 {
 
-	std::vector<X::Math::Vector2> regularTilesPositions;
-
-	//Gets the "non-base tiles"
-	for (int y = 0; y < tileMap.getRows(); ++y) {
-		for (int x = 0; x < tileMap.getColumns(); ++x) {
-			if (tileMap.IsCommonTile(x, y) == true) {
-				regularTilesPositions.push_back(tileMap.GetPixelPosition(x, y));
-			}
-		}
-	}
-	//Spawns the agents on random tiles inside the base tiles
 	for (int i = 0; i < mineralNum; ++i) {
-		if (!regularTilesPositions.empty()) {
-			int randomIndex = X::Random(0, static_cast<int>(regularTilesPositions.size()) - 1);
-			auto& collector = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
-			collector->Initialize(regularTilesPositions[randomIndex]);
-
-			regularTilesPositions.erase(regularTilesPositions.begin() + randomIndex);
-		}
+		X::Math::Vector2 randomPosition = GenerateRandomNonBaseTilePosition(tileMap);
+		auto& mineral = minerals.emplace_back(std::make_unique<Mineral>(aiWorld));
+		mineral->Initialize(randomPosition);
 	}
 
 }
@@ -120,16 +133,41 @@ void GameInit()
 	agentManager.SetMinerals(minerals);
 
 
-	if (!explorerAgents.empty() && !minerals.empty()) {
-		explorerAgents.front()->SetTargetPosition(TestPosition);
-	}
+	/*if (!explorerAgents.empty() && !minerals.empty()) {
+		explorerAgents.front()->SetTargetPosition(GenerateRandomNonBaseTilePosition(tileMap));
+	}*/
 }
 
 bool GameLoop(float deltaTime)
 {
+	/*
+	static float timer = 0.0f; 
+	timer += deltaTime;
 
-	tileMap.Render(false);
+	if (timer >= 5.0f) {
+		timer -= 5.0f;
+		agentManager.RemoveCollectedMineral();
+	}
 
+
+	if (agentManager.GetNumCollectedMinerals() > 5)
+	{
+		for (auto& agent : explorerAgents)
+		{
+			agent->SetBackHomeStatus(true);
+		}
+	}
+	else
+	{
+		for (auto& agent : explorerAgents)
+		{
+			agent->SetHasTarget(true);
+		}
+	}*/
+
+
+
+	tileMap.Render(showDebug);
 	//agent updates
 	for (auto& agent : collectorAgents)
 	{
@@ -149,14 +187,20 @@ bool GameLoop(float deltaTime)
 		mineral->Render();
 	}
 
+	agentManager.AssignMineralToCollector();
 
 	ImGui::Begin("Steering", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 	{
 		ImGui::Text("Minerals: %d", agentManager.GetNumCollectedMinerals());
+
 		if (ImGui::Button("Add minerals"))
 		{
 			InitalizeResources();
 
+		}
+		if (ImGui::Button("show Debug?"))
+		{
+			showDebug = true;
 		}
 		if (ImGui::Button("BackHome"))
 		{
@@ -165,12 +209,8 @@ bool GameLoop(float deltaTime)
 				agent->SetBackHomeStatus(true);
 			}
 		}
-		if (ImGui::Button("GiveMineral"))
-		{
-			agentManager.AssignMineralToCollector();	
-		}
-	}
 
+	}
 
 	ImGui::End();
 	

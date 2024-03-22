@@ -6,6 +6,7 @@
 #include "Mineral.h"
 #include "CollectorStates.h"
 
+
 //Collector states
 enum class CollectorState {
     Idle,
@@ -29,7 +30,6 @@ public:
     bool IsMoving() const { return isMoving; }
 
     // Mineral Management
-    void CheckForMinerals();
     void SetMineralsReference(std::vector<std::unique_ptr<Mineral>>& mineralsRef) {
         minerals = &mineralsRef;
     }
@@ -41,6 +41,7 @@ public:
     bool RemoveMineralAtPosition(const X::Math::Vector2& position);
     // State Management
     virtual AI::StateMachine<Collector>& GetStateMachine() { return mStateMachine; }
+    virtual void ExitIdleState() { mStateMachine.ChangeState(static_cast<int>(CollectorState::Recollecting)); }
 
     // Accessors
     X::Math::Vector2 GetSpawnposition() { return Spawnposition; }
@@ -48,6 +49,8 @@ public:
     bool HasTarget() const { return hasTarget; }
     const X::Math::Vector2& GetTargetPosition() const { return targetPosition; }
     void setIsMoving(bool IsMoving) { isMoving = IsMoving; }
+
+
 
 protected:
     // Rendering
@@ -70,4 +73,5 @@ protected:
 
     // State Machine
     AI::StateMachine<Collector> mStateMachine;
+
 };

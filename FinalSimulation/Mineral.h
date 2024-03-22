@@ -22,7 +22,6 @@ public:
 	void SetAssigned(bool assigned) { this->assigned = assigned; }
 	bool IsAssigned() const { return assigned; }
 
-
 private:
 	X::TextureId mTextureId;
 	bool isDiscovered = false;

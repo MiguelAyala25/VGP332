@@ -3,7 +3,6 @@
 
 //idle state
 void IdleState::Enter(Collector& agent) {
-    // Implementación específica para cuando el agente entra en este estado
 }
 
 void IdleState::Update(Collector& agent, float deltaTime) {

@@ -34,3 +34,12 @@ int AgentManager::GetNumCollectedMinerals()
     return collectedMinerals;
 }
 
+void AgentManager::RemoveCollectedMineral() {
+    for (auto it = minerals->begin(); it != minerals->end(); ++it) {
+        if ((*it)->IsCollected()) {
+
+            it = minerals->erase(it);
+            return; 
+        }
+    }
+}

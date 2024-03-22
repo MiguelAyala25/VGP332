@@ -43,6 +43,9 @@ public:
 
     bool HasReachedDestination();
 
+    //states 
+    void ExitIdleState() override { mStateMachine.ChangeState(static_cast<int>(ExplorerState::MovingToPosition)); }
+
 private:
     bool backHomeStatus = false;
     //perception
