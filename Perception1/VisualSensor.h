@@ -1,7 +1,6 @@
 #pragma once
 
 #include <AI.h>
-
 #include "TypeIds.h"
 
 class VisualSensor : public AI::Sensor

@@ -37,12 +37,12 @@ void VisualSensor::Update(Agent& agent, MemoryRecords& memory, float deltaTime)
 		}
 
 		// line of sight
-		/*X::Math::LineSegment lineToTarget(agent.position, entity->position);
+		X::Math::LineSegment lineToTarget(agent.position, entity->position);
 		if (!agent.world.HasLineOfSight(lineToTarget))
 		{
 			X::DrawScreenLine(agent.position, entity->position, X::Colors::Red);
 			continue;
-		}*/
+		}
 
 		//have I seen this before
 		auto iter = std::find_if(memory.begin(), memory.end(),

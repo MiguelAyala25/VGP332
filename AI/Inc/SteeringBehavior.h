@@ -25,6 +25,6 @@ namespace AI
 	private:
 		float mWeight = 1.0f;
 		bool mActive = false;
-		bool mDebug = false;
+		bool mDebug = true;
 	};
 }

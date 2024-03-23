@@ -42,10 +42,10 @@ private:
 	AI::ArriveBehavior* mArriveBehavior = nullptr;
 	AI::WanderBehavior* mWanderBehavior = nullptr;
 	AI::PursuitBehavior* mPursuitBehavior = nullptr;
+	AI::EvadeBehavior* mEvadeBehavior = nullptr;
 	AI::SeparationBehavior* mSeparationBehavior = nullptr;
 	AI::AlignmentBehavior* mAlignmentBehavior = nullptr;
 	AI::CohesionBehavior* mCohesionBehavior = nullptr;
-	AI::EvadeBehavior* mEvadeBehavior = nullptr;
 
 	std::array<X::TextureId, 16> mTextureIds;
 };

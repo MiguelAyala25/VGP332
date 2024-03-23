@@ -3,6 +3,7 @@
 #include "TypeIds.h"
 
 #include "VisualSensor.h" 
+#include "CollisionSensor.h"
 
 extern float wanderJitter;
 extern float wanderRadius;
@@ -61,6 +62,10 @@ void SCV::Load()
 	mVisualSensor2 = mPerceptionModule->AddSensor<VisualSensor>();
 	mVisualSensor2->targetType = AgentType::SCV;
 
+	mCollisionSensor = mPerceptionModule->AddSensor<CollisionSensor>();
+	mCollisionSensor->SetCollisionRadius(collisionRadius);
+
+
 	mSteeringModule = std::make_unique<AI::SteeringModule>(*this);
 	mSeekBehavior = mSteeringModule->AddBehavior<AI::SeekBehavior>();
 	mFleeBehavior = mSteeringModule->AddBehavior<AI::FleeBehavior>();
@@ -91,8 +96,10 @@ void SCV::Update(float deltaTime)
 {
 	mVisualSensor->viewRange = viewRange;
 	mVisualSensor->viewHalfAngle = viewAngle * X::Math::kDegToRad;
-	mVisualSensor2->viewRange = viewRange * -0.5;
+	mVisualSensor2->viewRange = viewRange * .5;
 	mVisualSensor2->viewHalfAngle = viewAngle * X::Math::kDegToRad;
+
+
 	mPerceptionModule->Update(deltaTime);
 
 	if (mWanderBehavior != nullptr)
@@ -147,6 +154,17 @@ void SCV::Render()
 	const float percent = angle / X::Math::kTwoPi;
 	const int frame = static_cast<int>(percent * mTextureIds.size()) % mTextureIds.size();
 	X::DrawSprite(mTextureIds[frame], position);
+
+	X::Color circleColor;
+	if (mCollisionSensor->HasCollided()) {
+		circleColor = X::Colors::Red;
+	}
+	else {
+		circleColor = X::Colors::Green; 
+	}
+
+	X::DrawScreenCircle(position, mCollisionSensor->GetCollisionRadious(), circleColor);
+
 }
 
 void SCV::ShowDebug(bool debug)

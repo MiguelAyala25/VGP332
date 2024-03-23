@@ -139,12 +139,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionSensor.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="SCV.h" />
     <ClInclude Include="TypeIds.h" />
     <ClInclude Include="VisualSensor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionSensor.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="SCV.cpp" />
     <ClCompile Include="VisualSensor.cpp" />

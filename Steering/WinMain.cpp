@@ -50,13 +50,14 @@ void SpawnAgent()
 	agent->destination = destination;
 	agent->target = &target;
 	agent->radius = radius;
-	agent->ShowDebug(showDebug);
+	agent->ShowDebug(true);
 	agent->SetSeek(useSeek);
 	agent->SetFlee(useFlee);
 	agent->SetArrive(useArrive);
 	agent->SetWander(useWander);
 	agent->SetPursuit(usePursuit);
-	agent->SetAlignment(useEvade);
+	agent->SetAlignment(useAlignment);
+	agent->SetEvade(useEvade);
 
 	agent->SetSeparation(useSeparation);
 	agent->SetAlignment(useAlignment);

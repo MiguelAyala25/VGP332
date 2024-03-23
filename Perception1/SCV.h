@@ -2,10 +2,11 @@
 #include "AI.h"
 
 class VisualSensor;
-
+class CollisionSensor;
 class SCV : public AI::Agent
 {
 public:
+
 	SCV(AI::AIWorld& world);
 	~SCV() override = default;
 
@@ -37,10 +38,14 @@ public:
 	void SetCohesionWeight(float weight);
 
 	void SetEvadeWeight(float weight);
+
+	float collisionRadius = 25.0f;
+
 private:
 
 	VisualSensor* mVisualSensor = nullptr;
 	VisualSensor* mVisualSensor2 = nullptr;
+	CollisionSensor* mCollisionSensor = nullptr;
 
 	std::unique_ptr<AI::PerceptionModule> mPerceptionModule;
 	std::unique_ptr<AI::SteeringModule> mSteeringModule;
